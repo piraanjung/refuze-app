@@ -4,7 +4,7 @@ export const MAIN_MENU_PURCHASE_ITEMS = {
       "image": "assets/images/background/0.jpg",
       "title": "ค้นหาผู้ขายขยะ",
       "title_button" :"ค้นหาผู้ขายขยะ",
-      "link": 'find-seller'
+      "link": 'find-seller-tabs'
     },
     {
       "image": "assets/images/background/9.jpg",

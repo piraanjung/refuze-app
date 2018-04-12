@@ -8,7 +8,9 @@ import { IonicPage, NavController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  name : 'find-seller-tabs'
+})
 @Component({
   selector: 'page-find-seller-tabs',
   templateUrl: 'find-seller-tabs.html'

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { Storage } from '@ionic/storage';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
  /**
  * Generated class for the FindByQrCodePage page.
@@ -23,10 +22,14 @@ export class FindByQrCodePage {
   seller: any={};
   has_user: boolean = false
   items: any={};
+  FindItemsPage: string
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     private barcodeScanner: BarcodeScanner, private findSeller : FindSellersProvider, 
-    private toastCtrl: ToastController, private storage: Storage) {
+    private toastCtrl: ToastController) {
+      localStorage.removeItem('sellerProfile')
+      this.FindItemsPage = 'find-items'
   }
 
   ionViewDidLoad() {
@@ -49,21 +52,20 @@ export class FindByQrCodePage {
   }
 
   search_user(sellercode) {
-    this.findSeller.getSeller(sellercode).subscribe(res => {
+    // this.findSeller.getSeller(sellercode).subscribe(res => {
 
-    this.seller = res
-      
-      this.storage.set('current_seller', this.seller);
-      console.log(this.seller)
-      if (JSON.stringify(this.seller) == '{}') {
+    // this.seller = res
+    if(sellercode != '122222'){
+      // if (JSON.stringify(this.seller) == '{}') {
         this.presentToast("ไม่พบข้อมูล")
         this.has_user = false
       } else {
+        localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
         this.has_user = true
       }
-    }, (error: any) => {
-      this.presentToast("ไม่พบข้อมูล");
-    })
+    // }, (error: any) => {
+    //   this.presentToast("ไม่พบข้อมูล");
+    // })
   }
 
   presentToast(txt) {
