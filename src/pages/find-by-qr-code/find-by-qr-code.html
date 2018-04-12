@@ -7,12 +7,46 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>findByQRCode</ion-title>
+    <ion-title>ค้นหาผู้ขายขยะโดย QR CODE</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div style="text-align:center; margin-top:10%">
+        <button ion-button class="circle" (click)="Scanqrcode()">
+          <i class="icon icon-qrcode"></i>
+        </button>
+    </div>
+
+    <div class="item-accordion"  *ngIf="has_user">
+        <ion-row>
+          <ion-col col-4>
+            <img src="assets/images/avatar/23.jpg" />
+          </ion-col>
+          <ion-col col-8>
+        
+             <h2 header-title>{{seller.name}} {{seller.last_name}}</h2>
+            <h5 header-title>{{ seller.mobile }}</h5>
+            <h5 header-subtitle>
+              {{ seller.address }}
+              ต. {{seller.DISTRICT_NAME}}
+              อ. {{seller.AMPHUR_NAME}}
+              จ. {{seller.PROVINCE_NAME}}
+              {{seller.zipcode}}
+            </h5>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-12 col-sm-12 col-md-12 offset-2 offset-lg-2 col-lg-6 offset-xl-2 col-xl-6>
+            <button ion-button round color="facebook" [navPush]="FindItemsPage">รับซื้อขยะ</button>
+            <button ion-button round color="twitter" (click)="goToHistorySeller(seller)">ประวัติรับซื้อขยะ</button>
+          </ion-col>
+        </ion-row>
+
+      </div>
+   
 
 </ion-content>

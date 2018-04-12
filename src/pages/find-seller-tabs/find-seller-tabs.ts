@@ -16,7 +16,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 export class FindSellerTabsPage {
 
   findByNameRoot = 'find-seller'
-  findByQrCodeRoot = 'find-by-qrcode'
+  findByQrCodeRoot = 'find-by-qr-code'
 
 
   constructor(public navCtrl: NavController) {}

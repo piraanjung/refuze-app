@@ -19,4 +19,8 @@ export class FindSellersProvider {
     return this.http.get<Sellers[]>(`${API_URL}/sellers`, { headers: this.API_HEADERS })
   }
 
+  getSeller(sellerCode) :any{
+    return this.http.get<Sellers[]>(`${API_URL}/sellers` + sellerCode)
+  }
+
 }
