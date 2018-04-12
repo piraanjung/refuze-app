@@ -44,6 +44,7 @@ export class AuthenticationPage {
     this.authen.resAuthen(this.params).subscribe(
       res => {
         if (res.logged === true) {
+          console.log(res)
           this.BuyerProfile = res
           localStorage.setItem('buyerProfile', JSON.stringify(this.BuyerProfile))
           this.app.getRootNav().setRoot('main-menu-purchase-items');
