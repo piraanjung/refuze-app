@@ -8,6 +8,6 @@ import { FindSellerTabsPage } from './find-seller-tabs';
   ],
   imports: [
     IonicPageModule.forChild(FindSellerTabsPage),
-  ],
+  ]
 })
 export class FindSellerTabsPageModule {}

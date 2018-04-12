@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
- * Generated class for the FindSellerTabsPage page.
+ * Generated class for the FindSellerTabsPage tabs.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,15 +11,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-find-seller-tabs',
-  templateUrl: 'find-seller-tabs.html',
+  templateUrl: 'find-seller-tabs.html'
 })
 export class FindSellerTabsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  findByNameRoot = 'find-seller'
+  findByQrCodeRoot = 'find-by-qrcode'
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FindSellerTabsPage');
-  }
+
+  constructor(public navCtrl: NavController) {}
 
 }
