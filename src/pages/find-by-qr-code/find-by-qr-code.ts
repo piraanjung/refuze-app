@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, App } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
  /**
@@ -19,15 +19,28 @@ import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 export class FindByQrCodePage {
   data = {}
   option: BarcodeScannerOptions;
-  seller: any={};
+  seller: any={
+    'name': 'พิพัฒน์พงษ์',
+    'last_name' : 'ห้องแซง',
+    'mobile' : '0986753456',
+    'address' : '424/12',
+    'DISTRICT_NAME' : 'โนนม่วง',
+    'AMPHUR_NAME' : 'เมืองขอนแก่น',
+    'PROVINCE_NAME' : 'ขอนแก่น',
+    'zipcode' : 40000
+  };
   has_user: boolean = false
   items: any={};
   FindItemsPage: string
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    private barcodeScanner: BarcodeScanner, private findSeller : FindSellersProvider, 
-    private toastCtrl: ToastController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private barcodeScanner: BarcodeScanner, 
+    private findSeller : FindSellersProvider, 
+    private alertCtrl: AlertController,
+    private app: App) {
       localStorage.removeItem('sellerProfile')
       this.FindItemsPage = 'find-items'
   }
@@ -41,45 +54,72 @@ export class FindByQrCodePage {
       preferFrontCamera: false,
       prompt: "สแกน QR CODE"
     }
-    this.barcodeScanner.scan(this.option).then((barcodeData) => {
-      this.data = barcodeData.text
-      this.search_user(this.data)
-    }, (err) => {
-      // An error occurred
-      console.log(err)
-    });
+    this.search_user('3459324345165')
+
+    // this.barcodeScanner.scan(this.option).then((barcodeData) => {
+    //   this.data = barcodeData.text
+    //   this.search_user(this.data)
+    // }, (err) => {
+    //   // An error occurred
+    //   console.log(err)
+    // });
 
   }
 
   search_user(sellercode) {
-    // this.findSeller.getSeller(sellercode).subscribe(res => {
+    this.findSeller.getSeller(sellercode).subscribe(res => {
 
-    // this.seller = res
-    if(sellercode != '122222'){
-      // if (JSON.stringify(this.seller) == '{}') {
-        this.presentToast("ไม่พบข้อมูล")
+    this.seller = res
+    console.log(res)
+    // if(sellercode != '122222'){
+      if (JSON.stringify(this.seller) == '{}') {
+        this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
         this.has_user = false
       } else {
         localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
         this.has_user = true
       }
-    // }, (error: any) => {
-    //   this.presentToast("ไม่พบข้อมูล");
-    // })
+    }, (error: any) => {
+      this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
+    })
   }
 
-  presentToast(txt) {
-    let toast = this.toastCtrl.create({
-      message: txt,
-      duration: 2000,
-      position: 'top'
-    });
+  // search_user(sellercode) {
+  //   // this.findSeller.getSeller(sellercode).subscribe(res => {
 
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
+  //   // this.seller = res
+  //   if(sellercode != '122222'){
+  //     // if (JSON.stringify(this.seller) == '{}') {
+  //       this.presentToast("ไม่พบข้อมูล")
+  //       this.has_user = false
+  //     } else {
+  //       localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
+  //       this.has_user = true
+  //     }
+  //   // }, (error: any) => {
+  //   //   this.presentToast("ไม่พบข้อมูล");
+  //   // })
+  // }
 
-    toast.present();
+  presentAlert(title, subtitle) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['ปิด']
+    });
+    alert.present();
+  }
+
+  gotoFindItems(seller){
+    localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
+    this.app.getRootNav().setRoot('find-items');
+  }
+
+
+  goToHistorySeller(seller) {
+    this.app.getRootNav().setRoot('PurchaseHistoryPage', {
+      seller: seller
+    })
   }
 
 }

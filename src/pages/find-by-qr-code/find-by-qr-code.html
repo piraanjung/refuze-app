@@ -20,13 +20,14 @@
         </button>
     </div>
 
-    <div class="item-accordion"  *ngIf="has_user">
+    <div class="item-accordion"> 
+      <!-- *ngIf="has_user"> -->
         <ion-row>
           <ion-col col-4>
             <img src="assets/images/avatar/23.jpg" />
           </ion-col>
           <ion-col col-8>
-        
+              <div class="title-components">ข้อมูลผู้ขายขยะ:</div>
              <h2 header-title>{{seller.name}} {{seller.last_name}}</h2>
             <h5 header-title>{{ seller.mobile }}</h5>
             <h5 header-subtitle>
@@ -41,7 +42,9 @@
 
         <ion-row>
           <ion-col col-12 col-sm-12 col-md-12 offset-2 offset-lg-2 col-lg-6 offset-xl-2 col-xl-6>
-            <button ion-button round color="facebook" [navPush]="FindItemsPage">รับซื้อขยะ</button>
+            <!-- <button ion-button round color="facebook" [navPush]="FindItemsPage">รับซื้อขยะ</button> -->
+            <button ion-button round color="facebook" (click)="gotoFindItems()">รับซื้อขยะ</button>
+
             <button ion-button round color="twitter" (click)="goToHistorySeller(seller)">ประวัติรับซื้อขยะ</button>
           </ion-col>
         </ion-row>

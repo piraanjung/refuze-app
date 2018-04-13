@@ -42,6 +42,8 @@ export class FindItemsPage {
     this.getFavorite()
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
     this.countItems = Object.keys(this.items).length
+    this.seller = JSON.parse(localStorage.getItem('sellerProfile'))
+    console.log(this.seller)
   }
 
   getFavorite() {
