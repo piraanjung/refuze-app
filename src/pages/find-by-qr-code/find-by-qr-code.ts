@@ -43,6 +43,7 @@ export class FindByQrCodePage {
     private app: App) {
       localStorage.removeItem('sellerProfile')
       this.FindItemsPage = 'find-items'
+      this.Scanqrcode()
   }
 
   ionViewDidLoad() {
@@ -54,15 +55,15 @@ export class FindByQrCodePage {
       preferFrontCamera: false,
       prompt: "สแกน QR CODE"
     }
-    this.search_user('3459324345165')
+    // this.search_user('3459324345165')
 
-    // this.barcodeScanner.scan(this.option).then((barcodeData) => {
-    //   this.data = barcodeData.text
-    //   this.search_user(this.data)
-    // }, (err) => {
-    //   // An error occurred
-    //   console.log(err)
-    // });
+    this.barcodeScanner.scan(this.option).then((barcodeData) => {
+      this.data = barcodeData.text
+      this.search_user(this.data)
+    }, (err) => {
+      // An error occurred
+      console.log(err)
+    });
 
   }
 
@@ -75,12 +76,14 @@ export class FindByQrCodePage {
       if (JSON.stringify(this.seller) == '{}') {
         this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
         this.has_user = false
+        this.Scanqrcode()
       } else {
         localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
         this.has_user = true
       }
     }, (error: any) => {
       this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
+      this.has_user = false
     })
   }
 

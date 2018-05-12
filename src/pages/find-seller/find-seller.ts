@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, App } from 'ionic-angular';
 import { Sellers } from '../../models/sellers';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 import { ProfileSellerPage } from '../profile-seller/profile-seller';
@@ -29,7 +29,8 @@ export class FindSellerPage {
   constructor(
     private navCtrl: NavController,
     private findSeller: FindSellersProvider,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private app: App
   ) {
     localStorage.removeItem('purchaseItems')
     localStorage.removeItem('sellerProfile')
@@ -72,7 +73,8 @@ export class FindSellerPage {
 
   goToProfileSeller(profile) {
     localStorage.setItem('sellerProfile', JSON.stringify(profile))
-    this.navCtrl.push('ProfileSellerPage')
+    // this.navCtrl.push('ProfileSellerPage')
+    this.app.getRootNav().setRoot(ProfileSellerPage)
   }
 
   getItems(ev) {
@@ -106,7 +108,7 @@ export class FindSellerPage {
 
 
   goToHistorySeller(seller) {
-    this.navCtrl.push('PurchaseHistoryPage', {
+    this.app.getRootNav().setRoot('PurchaseHistoryPage', {
       seller: seller
     })
   }
