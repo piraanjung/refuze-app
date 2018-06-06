@@ -43,7 +43,8 @@ export class AuthenticationPage {
 
     this.authen.resAuthen(this.params).subscribe(
       res => {
-        if (res.logged === true) {
+        // if (res.logged === true) {
+        if (res.status === 1) { 
           console.log(res)
           this.BuyerProfile = res
           localStorage.setItem('buyerProfile', JSON.stringify(this.BuyerProfile))

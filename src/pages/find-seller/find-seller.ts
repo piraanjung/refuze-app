@@ -74,7 +74,7 @@ export class FindSellerPage {
   goToProfileSeller(profile) {
     localStorage.setItem('sellerProfile', JSON.stringify(profile))
     // this.navCtrl.push('ProfileSellerPage')
-    this.app.getRootNav().setRoot(ProfileSellerPage)
+    this.app.getRootNav().setRoot('ProfileSellerPage')
   }
 
   getItems(ev) {
@@ -88,7 +88,6 @@ export class FindSellerPage {
   }
 
   toggleGroup(group: any, profile) {
-    console.log(group)
     group.show = !group.show;
     localStorage.setItem('sellerProfile', JSON.stringify(profile))
     this.seller = profile

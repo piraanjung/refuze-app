@@ -43,7 +43,8 @@ export class FindByQrCodePage {
     private app: App) {
       localStorage.removeItem('sellerProfile')
       this.FindItemsPage = 'find-items'
-      this.Scanqrcode()
+      // this.Scanqrcode()
+      this.search_user('dd')
   }
 
   ionViewDidLoad() {
@@ -68,10 +69,11 @@ export class FindByQrCodePage {
   }
 
   search_user(sellercode) {
+    sellercode = '34593724345123'
     this.findSeller.getSeller(sellercode).subscribe(res => {
 
     this.seller = res
-    console.log(res)
+    console.log(this.seller)
     // if(sellercode != '122222'){
       if (JSON.stringify(this.seller) == '{}') {
         this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
