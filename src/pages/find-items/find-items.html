@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>ค้นหารายการขยะ</ion-title>
+      <button ion-button icon-only menuToggle (click)="goTofindSellerTabs()">
+          <ion-icon name="backspace"></ion-icon>
+        </button>
+    <ion-title>รับซื้อรายการขยะ  </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -97,4 +100,5 @@
       <ion-badge color="google">{{ countItems }}</ion-badge>
     </button>
   </ion-fab>
+ 
 </ion-content>

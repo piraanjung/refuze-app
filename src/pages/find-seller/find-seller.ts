@@ -71,12 +71,7 @@ export class FindSellerPage {
     })
   }
 
-  // goToProfileSeller(profile) {
-  //   localStorage.setItem('sellerProfile', JSON.stringify(profile))
-  //   // this.navCtrl.push('ProfileSellerPage')
-  //   this.app.getRootNav().setRoot('ProfileSellerPage')
-  // }
-  goToProfileSeller(seller){
+  gotoFindItems(){
     localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
     this.app.getRootNav().setRoot('find-items');
   }
@@ -114,6 +109,10 @@ export class FindSellerPage {
     this.app.getRootNav().setRoot('PurchaseHistoryPage', {
       seller: seller
     })
+  }
+
+  goToMainMenu(){
+    this.app.getRootNav().setRoot('main-menu-purchase-items')
   }
 
 }

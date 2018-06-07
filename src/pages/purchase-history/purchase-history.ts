@@ -97,4 +97,8 @@ export class PurchaseHistoryPage {
     return group.show;
   }
 
+  goToMainMenu(){
+    this.navCtrl.setRoot('find-seller-tabs')
+  }
+
 }

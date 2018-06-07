@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, ModalController, LoadingController, NavController } from 'ionic-angular';
 import { ItemsProvider } from '../../providers/items/items';
 import { Item } from '../../models/item';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
@@ -25,7 +25,8 @@ export class FindItemsPage {
     private modalCtrl: ModalController,
     private itemsProvider: ItemsProvider,
     private findSeller: FindSellersProvider,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private navCtrl : NavController
   ) {
     this.countItems = 0
     this.PurchaseItems = 'purchase-items'
@@ -45,7 +46,7 @@ export class FindItemsPage {
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
     this.countItems = Object.keys(this.items).length
     this.seller = JSON.parse(localStorage.getItem('sellerProfile'))
-    console.log(this.seller)
+    console.log(this.seller.name)
   }
 
   getFavorite() {
@@ -104,6 +105,11 @@ export class FindItemsPage {
     let cur_date = new Date().getDate()+"/"+curmonth+"/"+curyear+" "+curhour+":"+curminute+":"+cursecond;
 
     return date == cur_date ? true : false;
+  }
+
+  goTofindSellerTabs(){
+    localStorage.removeItem('sellerProfile')
+    this.navCtrl.push('find-seller-tabs');
   }
 
 }

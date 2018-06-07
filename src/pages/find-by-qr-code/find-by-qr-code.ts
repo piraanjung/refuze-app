@@ -115,7 +115,7 @@ export class FindByQrCodePage {
     alert.present();
   }
 
-  gotoFindItems(seller){
+  gotoFindItems(){
     localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
     this.app.getRootNav().setRoot('find-items');
   }
@@ -125,6 +125,10 @@ export class FindByQrCodePage {
     this.app.getRootNav().setRoot('PurchaseHistoryPage', {
       seller: seller
     })
+  }
+
+  goToMainMenu(){
+    this.app.getRootNav().setRoot('main-menu-purchase-items')
   }
 
 }

@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button icon-only menuToggle (click)="goToMainMenu()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
     <ion-title>ค้นหาผู้ขายขยะโดย QR CODE</ion-title>
   </ion-navbar>
 
@@ -14,7 +17,7 @@
 
 
 <ion-content>
-    <div qrcod-btn>
+    <div qrcod-btn   *ngIf="!has_user">
         <button ion-button class="circle" (click)="Scanqrcode()">
           <i class="icon icon-qrcode"></i>
         </button>
