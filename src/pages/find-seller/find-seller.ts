@@ -71,10 +71,14 @@ export class FindSellerPage {
     })
   }
 
-  goToProfileSeller(profile) {
-    localStorage.setItem('sellerProfile', JSON.stringify(profile))
-    // this.navCtrl.push('ProfileSellerPage')
-    this.app.getRootNav().setRoot('ProfileSellerPage')
+  // goToProfileSeller(profile) {
+  //   localStorage.setItem('sellerProfile', JSON.stringify(profile))
+  //   // this.navCtrl.push('ProfileSellerPage')
+  //   this.app.getRootNav().setRoot('ProfileSellerPage')
+  // }
+  goToProfileSeller(seller){
+    localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
+    this.app.getRootNav().setRoot('find-items');
   }
 
   getItems(ev) {

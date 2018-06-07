@@ -43,8 +43,8 @@ export class FindByQrCodePage {
     private app: App) {
       localStorage.removeItem('sellerProfile')
       this.FindItemsPage = 'find-items'
-      // this.Scanqrcode()
-      this.search_user('dd')
+      this.Scanqrcode()
+      // this.search_user('dd')
   }
 
   ionViewDidLoad() {
@@ -58,18 +58,18 @@ export class FindByQrCodePage {
     }
     // this.search_user('3459324345165')
 
-    this.barcodeScanner.scan(this.option).then((barcodeData) => {
-      this.data = barcodeData.text
+    // this.barcodeScanner.scan(this.option).then((barcodeData) => {
+    //   this.data = barcodeData.text
+    this.data= '34593724345123'
       this.search_user(this.data)
-    }, (err) => {
-      // An error occurred
-      console.log(err)
-    });
+    // }, (err) => {
+    //   // An error occurred
+    //   console.log(err)
+    // });
 
   }
 
   search_user(sellercode) {
-    sellercode = '34593724345123'
     this.findSeller.getSeller(sellercode).subscribe(res => {
 
     this.seller = res
