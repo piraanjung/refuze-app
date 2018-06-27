@@ -20,7 +20,6 @@ export class FindSellersProvider {
   }
 
   getSeller(id_card) :any{
-    console.log('---'+id_card)
     return this.http.get(`${API_URL}/users/find-by-id-card/`+ id_card)
   }
 
