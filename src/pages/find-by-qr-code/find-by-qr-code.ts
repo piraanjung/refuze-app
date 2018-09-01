@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, App } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
+import { User } from '../../models/firebase.models';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { appconfig } from '../../providers/api-urls';
+import { Angular2ServiceProvider } from "../../providers/angular2-service/angular2-service";
+import { Observable } from "rxjs";
+import { map } from 'rxjs/operator/map';
  /**
  * Generated class for the FindByQrCodePage page.
  *
@@ -16,7 +22,9 @@ import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
   selector: 'page-find-by-qr-code',
   templateUrl: 'find-by-qr-code.html',
 })
-export class FindByQrCodePage {
+export class FindByQrCodePage implements OnInit {
+  user: Observable<User[]>;
+  private userCollection: AngularFirestoreCollection<User>;
   data = {}
   option: BarcodeScannerOptions;
   seller: any={
@@ -32,6 +40,7 @@ export class FindByQrCodePage {
   has_user: boolean = false
   items: any={};
   FindItemsPage: string
+  email = "note32@gmail.com";
 
 
   constructor(
@@ -40,11 +49,17 @@ export class FindByQrCodePage {
     private barcodeScanner: BarcodeScanner, 
     private findSeller : FindSellersProvider, 
     private alertCtrl: AlertController,
+    private db: AngularFirestore,
+    private angular2Provider: Angular2ServiceProvider,
     private app: App) {
       localStorage.removeItem('sellerProfile')
       this.FindItemsPage = 'find-items'
-      this.Scanqrcode()
-      // this.search_user('dd')
+      this.Scanqrcode();
+      
+    }
+
+  ngOnInit(){
+
   }
 
   ionViewDidLoad() {
@@ -56,11 +71,12 @@ export class FindByQrCodePage {
       preferFrontCamera: false,
       prompt: "สแกน QR CODE"
     }
-    // this.search_user('3459324345165')
 
     this.barcodeScanner.scan(this.option).then((barcodeData) => {
-      this.data = barcodeData.text
-    // this.data= '34593724345123'
+      // this.data = barcodeData.text
+      let _data = '1535688483059-3459324345189'.split("-");
+      console.log(_data[0])
+
       this.search_user(this.data)
     }, (err) => {
       // An error occurred
@@ -80,8 +96,12 @@ export class FindByQrCodePage {
         this.has_user = false
         this.Scanqrcode()
       } else {
-        localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
-        this.has_user = true
+        //ถ้าทำการสแกน QR Code แล้วเจอ user 
+        //1.ให้ทำการเก็บใน localStorage
+        this.matchingStatus(this.seller);
+        // localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
+        // this.has_user = true
+       
       }
     }, (error: any) => {
       this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
@@ -89,22 +109,6 @@ export class FindByQrCodePage {
     })
   }
 
-  // search_user(sellercode) {
-  //   // this.findSeller.getSeller(sellercode).subscribe(res => {
-
-  //   // this.seller = res
-  //   if(sellercode != '122222'){
-  //     // if (JSON.stringify(this.seller) == '{}') {
-  //       this.presentToast("ไม่พบข้อมูล")
-  //       this.has_user = false
-  //     } else {
-  //       localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
-  //       this.has_user = true
-  //     }
-  //   // }, (error: any) => {
-  //   //   this.presentToast("ไม่พบข้อมูล");
-  //   // })
-  // }
 
   presentAlert(title, subtitle) {
     let alert = this.alertCtrl.create({
@@ -120,7 +124,6 @@ export class FindByQrCodePage {
     this.app.getRootNav().setRoot('find-items');
   }
 
-
   goToHistorySeller(seller) {
     this.app.getRootNav().setRoot('PurchaseHistoryPage', {
       seller: seller
@@ -129,6 +132,36 @@ export class FindByQrCodePage {
 
   goToMainMenu(){
     this.app.getRootNav().setRoot('main-menu-purchase-items')
+  }
+
+  matchingStatus(seller){
+    //ทำการ split ค่าจากการสแกน qrcode จาก user วันที่timpstamp-id card
+    let data = '1535688483059-3459324345189'; 
+    let _data = data.split("-");
+    let id_card = _data[1]; 
+    //ทำการค้นหา seller โดย id_card จาก db   
+    this.findSeller.getSeller(id_card).subscribe(res => { console.log(res)
+        if(JSON.stringify(res) === "{}"){
+          let title ="ผลการค้นหา";
+          let subtitle = "ไม่พบการ matching  กรุณาลองใหม่";
+          this.presentAlert(title, subtitle);
+          this.has_user = false
+          this.Scanqrcode();
+        }else{
+          let payload={
+            name : res.name+ " " + res.last_name,
+            phone: res.mobile,
+            email: res.email,
+            matching_status : 1
+          }
+          //add payload ไปที่ firebase
+          this.angular2Provider.addUser(data, res);
+
+          this.seller = res
+          localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
+          this.has_user = true
+        }
+    })
   }
 
 }

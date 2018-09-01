@@ -4,6 +4,11 @@ import { Sellers } from '../../models/sellers';
 import { Buyer } from '../../models/buyer';
 import { Item } from '../../models/item';
 import { PurchaseItemsProvider } from '../../providers/purchase-items/purchase-items';
+import { User } from '../../models/firebase.models';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { appconfig } from '../../providers/api-urls';
+import { Observable } from "rxjs";
+import { Angular2ServiceProvider } from "../../providers/angular2-service/angular2-service";
 
 @IonicPage({
   name: 'purchase-items',
@@ -34,7 +39,9 @@ export class PurchaseItemsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
-    private purchaseItemsProvider: PurchaseItemsProvider
+    private purchaseItemsProvider: PurchaseItemsProvider,
+    private db: AngularFirestore,
+    private angular2Provider: Angular2ServiceProvider
   ) {
     this.total = 0
     this.isHide = false
@@ -91,6 +98,40 @@ export class PurchaseItemsPage {
       .subscribe((res) => {
         loading.dismiss();
         this.isHide = true
+        // update status = 2
+        let email = "note32@gmail.com";
+        this.db.collection<User>(appconfig.users_endpoint, 
+          ref =>{
+            
+            return ref.where("email", "==", email).where("status", "==", 1)
+          }).valueChanges().subscribe(data =>{
+            if(data.length === 0){
+              // var currentUser = {
+              //   name : this.seller.name,
+              //   email: email,
+              //   time: new Date().getTime(),
+              //   status: 2
+              // };
+              console.log('has  1')
+    
+              
+            }else{
+              console.log('1')
+                this.db.collection(appconfig.users_endpoint).doc(res.id).update({
+                  status : '2'
+                }).then(()=>{
+                  console.log('status change to  be 2')
+                }).catch(err=>{
+                  console.log(err)
+                })
+
+              //console.log(res.id)
+              //update  status ให้เป็รน1
+              // this.db.collection(appconfig.users_endpoint).doc(data).update({foo: "bar"});
+                 
+            }
+         })
+
       })
   }
 

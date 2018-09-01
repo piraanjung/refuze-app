@@ -23,4 +23,8 @@ export class FindSellersProvider {
     return this.http.get(`${API_URL}/users/find-by-id-card/`+ id_card)
   }
 
+  setstatus():any{
+    return this.http.get(`${API_URL}/users/testsetstatus`)
+  }
+
 }

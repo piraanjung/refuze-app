@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { Angular2ServiceProvider } from '../providers/angular2-service/angular2-service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MyApp } from './app.component';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Angular2ServiceProvider,
   ]
 })
 export class AppModule {}
