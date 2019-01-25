@@ -26,9 +26,9 @@ export class ProfileSellerPage {
     console.log(this.seller)
     if (Object.keys(this.seller).length !== 0) {
       this.id = this.id
-      this.fullname = `${this.seller.name} ${this.seller.last_name}`
+      this.fullname = `${this.seller.name} ${this.seller.lastname}`
       this.mobile = `เบอร์ติดต่อ ${this.seller.mobile}`
-      this.address = `บ้านเลขที่ ${this.seller.address} ตำบล ${this.seller.DISTRICT_NAME} อำเภอ ${this.seller.AMPHUR_NAME} จังหวัด ${this.seller.PROVINCE_NAME} ${this.seller.zipcode}`
+      this.address = `บ้านเลขที่ ${this.seller.address} ตำบล ${this.seller.tambon_name} อำเภอ ${this.seller.amphur_name} จังหวัด ${this.seller.province_name} ${this.seller.zipcode}`
     }
   }
 }

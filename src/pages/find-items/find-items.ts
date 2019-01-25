@@ -46,7 +46,6 @@ export class FindItemsPage {
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
     this.countItems = Object.keys(this.items).length
     this.seller = JSON.parse(localStorage.getItem('sellerProfile'))
-    console.log(this.seller.name)
   }
 
   getFavorite() {
@@ -59,6 +58,7 @@ export class FindItemsPage {
     this.itemsProvider.getFavorite().subscribe((res) => {
       loading.dismiss();
       this.items = res
+      console.log(this.items)
     })
   }
 
@@ -81,6 +81,7 @@ export class FindItemsPage {
   }
 
   presentaddModalItem(item) {
+    console.log(item)
     let profileModal = this.modalCtrl.create('purchase-items-modal', { item: item });
     profileModal.onDidDismiss(data => {
       this.getFavorite()

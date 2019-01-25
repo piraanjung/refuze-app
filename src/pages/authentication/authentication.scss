@@ -1,4 +1,16 @@
 page-authentication {
+  .title-components{
+    color: theme-colors('mainColors', 'secondary-first');
+    font-size: 16px;
+    font-weight: normal;
+    clear: both;
+    display: block;
+    margin: 32px 0;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid theme-colors('mainColors', 'secondary-first');
+}
+
   ion-col {
     position: relative;
     [button-clear] {
@@ -10,8 +22,8 @@ page-authentication {
   img {
     max-width: 100px;
     max-height: 100px;
-    display: block;
-    margin: 35px auto 20px;
+    // display: block;
+    // margin: 35px auto 20px;
   }
   .item-inner {
     border-bottom: 1px solid #0090d0 !important;

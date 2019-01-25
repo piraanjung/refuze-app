@@ -3,76 +3,52 @@
     <button ion-button icon-only menuToggle (click)="goToMainMenu()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-title>ค้นหาสมาชิกผู้ขายขยะ2x</ion-title>
-  
+    <ion-title>ค้นหาสมาชิกผู้ขายขยะ</ion-title>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid no-padding *ngIf="sellers != null">
-    <ion-row>
-      <ion-col col-12>
-        <ion-list no-margin>
-          <ion-list-header header-bcg no-padding no-lines>
-            
-            <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-          </ion-list-header>
+<ion-content class="find-seller">
 
-          <ion-grid no-padding *ngIf="data != null">
-            <ion-row>
-              <ion-col col-12>
-                <ion-list no-margin>
-                  <ul no-margin no-padding class="collapsible">
-                    <li *ngFor="let seller of sellers" no-lines [ngClass]="animateClass">
-                      <ion-list no-margin (click)="toggleGroup(seller,seller)">
-                        <ion-item no-lines>
-                          <ion-avatar item-start>
-                            <img src="assets/images/avatar/23.jpg" />
-                          </ion-avatar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
-                          <h2 item-title padding-left>{{seller.name}} {{seller.last_name}}</h2>
-                          <h2 item-subtitle padding-left>{{seller.id_card}} </h2>
-                          <ion-icon name="ios-arrow-dropdown-outline" item-right></ion-icon>
-                        </ion-item>
-                      </ion-list>
+  <ion-grid no-padding *ngIf="data != null">
+  <ion-list  *ngFor="let seller of sellers"  (click)="toggleGroup(seller,seller)" [ngClass]="animateClass">
+      <button ion-item >
+          <ion-avatar item-start>
+              <img src="assets/images/avatar/23.jpg" />
+            </ion-avatar>
+          <h2 item-title padding-left>{{seller.name}} {{seller.lastname}}</h2>
+                  <h2 item-subtitle padding-left>{{seller.id_card}} </h2>
+                  <ion-icon name="ios-arrow-dropdown-outline" item-right></ion-icon>
+                  
+      </button>  
+      <div class="item-accordion" [ngClass]="{'active': isGroupShown(seller) }" [hidden]="!isGroupShown(seller)">
+          <ion-row>
+            <ion-col col-4>
+              <img src="assets/images/avatar/23.jpg" />
+            </ion-col>
+            <ion-col col-8>
+              <h2 header-title>{{seller.name}} {{seller.lastname}}</h2>
+              <h5 header-title>{{ seller.phone }}</h5>
+              <h5 header-subtitle>
+                {{ seller.address }}
+                ต. {{seller.tambon_name}}
+                อ. {{seller.amphur_name}}
+                จ. {{seller.province_name}}
+                {{seller.zipcode}}
+              </h5>
+            </ion-col>
+          </ion-row>
 
-                      <div class="item-accordion" [ngClass]="{'active': isGroupShown(seller) }" [hidden]="!isGroupShown(seller)">
-                        <ion-row>
-                          <ion-col col-4>
-                            <img src="assets/images/avatar/23.jpg" />
-                          </ion-col>
-                          <ion-col col-8>
-                            <!-- <h2 header-title>{{ fullname }}</h2>
-                            <h5 header-title>{{ mobile }}</h5>
-                            <h5 header-subtitle>{{ address }}</h5> -->
-                             <h2 header-title>{{seller.name}} {{seller.last_name}}</h2>
-                            <h5 header-title>{{ seller.mobile }}</h5>
-                            <h5 header-subtitle>
-                              {{ seller.address }}
-                              ต. {{seller.DISTRICT_NAME}}
-                              อ. {{seller.AMPHUR_NAME}}
-                              จ. {{seller.PROVINCE_NAME}}
-                              {{seller.zipcode}}
-                            </h5>
-                          </ion-col>
-                        </ion-row>
+          <ion-row>
+            <ion-col col-12 col-sm-12 col-md-12 offset-2 offset-lg-2 col-lg-6 offset-xl-2 col-xl-6>
+              <button ion-button round color="facebook" (click)="gotoFindItems()">รับซื้อขยะ</button>
+              <button ion-button round color="twitter" (click)="goToHistorySeller(seller)">ประวัติรับซื้อขยะ</button>
+            </ion-col>
+          </ion-row>
 
-                        <ion-row>
-                          <ion-col col-12 col-sm-12 col-md-12 offset-2 offset-lg-2 col-lg-6 offset-xl-2 col-xl-6>
-                            <button ion-button round color="facebook"(click)="gotoFindItems()">รับซื้อขยะ</button>
-                            <button ion-button round color="twitter" (click)="goToHistorySeller(seller)">ประวัติรับซื้อขยะ</button>
-                          </ion-col>
-                        </ion-row>
-
-                      </div>
-                    </li>
-                  </ul>
-                </ion-list>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-list>
-      </ion-col>
-    </ion-row>
+        </div>
+    </ion-list>
   </ion-grid>
 </ion-content>

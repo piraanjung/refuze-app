@@ -16,11 +16,11 @@ export class PurchaseItemsProvider {
   }
 
   createPurchaseProfile(params): any {
-    return this.http.post(`${API_URL}/purchase-items/create`, params, { headers: this.API_HEADERS })
+    return this.http.post(`${API_URL}/api/purchase-items/create`, params)
   }
 
   getPurchaseTransactionsHistoryBySellerId(id): any {
-    return this.http.get<PurchaseTransactionHistory[]>(`${API_URL}/purchase-items/seller-id/${id}`, { headers: this.API_HEADERS })
+    return this.http.get<PurchaseTransactionHistory[]>(`${API_URL}/api/purchase-items/history/seller/${id}`)
   }
 
 }

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, App } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, App, AlertController } from 'ionic-angular';
 import { Sellers } from '../../models/sellers';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 import { ProfileSellerPage } from '../profile-seller/profile-seller';
 import { PurchaseHistoryPage } from '../purchase-history/purchase-history';
-
 @IonicPage({
   name: 'find-seller'
 })
@@ -15,7 +14,7 @@ import { PurchaseHistoryPage } from '../purchase-history/purchase-history';
 export class FindSellerPage {
   data: any = {}
   sellers: Sellers[];
-  // sellers = [];
+  // sellers = {};
   seller: Sellers
   id: number
   address: string
@@ -30,7 +29,8 @@ export class FindSellerPage {
     private navCtrl: NavController,
     private findSeller: FindSellersProvider,
     private loadingCtrl: LoadingController,
-    private app: App
+    private app: App,
+    private alert:AlertController
   ) {
     localStorage.removeItem('purchaseItems')
     localStorage.removeItem('sellerProfile')
@@ -56,16 +56,17 @@ export class FindSellerPage {
     loading.present();
 
     this.findSeller.getSellers().subscribe((res) => {
+      this.sellers = res
       loading.dismiss();
-      let i = 0
-      let that = this
-      let arr = []
-      res.forEach(function (value) {
-        setTimeout(function () {
-          that.sellers.push(value)
-      }, 200 * i++);
-      }); 
-    
+      // let i = 1
+      // let that = this
+      // let arr = []
+      // res.forEach(function (value) {
+      //   setTimeout(function () {
+      //     that.sellers.push(value)
+      // }, 200 * i++);
+      // }); 
+    console.log(this.sellers)
     }, error=> {
       loading.dismiss();      
     })
@@ -78,9 +79,15 @@ export class FindSellerPage {
 
   getItems(ev) {
     let val = ev.target.value;
-
     if (val && val.trim() != '') {
-      this.sellers = this.sellers.filter((seller) => (seller.name.toLowerCase().indexOf(val.toLowerCase()) > -1))
+      if(val.match('^[0-9]*$') != null){
+        console.log(this.sellers)
+        //ทำการ search โดย ใช้หมายเลขโทรศัพท์
+        this.sellers = this.sellers.filter((seller) => (seller.phone.indexOf(val)> -1))
+      }else{
+        //ทำการค้นหาโยชื่อ
+        this.sellers = this.sellers.filter((seller) => (seller.name.toLowerCase().indexOf(val.toLowerCase()) > -1))
+      }
     } else {
       this.getSellers()
     }
@@ -93,9 +100,9 @@ export class FindSellerPage {
 
     if (Object.keys(this.seller).length !== 0) {
       this.id = this.id
-      this.fullname = `${this.seller.name} ${this.seller.last_name}`
+      this.fullname = `${this.seller.name} ${this.seller.lastname}`
       this.mobile = `เบอร์ติดต่อ ${this.seller.mobile}`
-      this.address = `บ้านเลขที่ ${this.seller.address} ตำบล ${this.seller.DISTRICT_NAME} อำเภอ ${this.seller.AMPHUR_NAME} จังหวัด ${this.seller.PROVINCE_NAME} ${this.seller.zipcode}`
+      this.address = `บ้านเลขที่ ${this.seller.address} ตำบล ${this.seller.tambon_name} อำเภอ ${this.seller.amphur_name} จังหวัด ${this.seller.province_name} ${this.seller.zipcode}`
     }
   }
 

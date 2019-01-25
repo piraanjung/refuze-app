@@ -24,9 +24,10 @@ export class Angular2ServiceProvider {
     this.users = db.collection<User>(appconfig.users_endpoint);
   }
   addUser(doc_id, payload){
+    console.log(payload)
     return this.users.doc(doc_id).set({ 
-      name : payload.name+ " " + payload.last_name,
-      phone: payload.mobile,
+      name : payload.name,
+      mobile: payload.mobile,
       email: payload.email,
       matching_status : 1
     });

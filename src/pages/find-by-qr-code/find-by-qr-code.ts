@@ -25,7 +25,7 @@ import { map } from 'rxjs/operator/map';
 export class FindByQrCodePage implements OnInit {
   user: Observable<User[]>;
   private userCollection: AngularFirestoreCollection<User>;
-  data = {}
+  data: string="";
   option: BarcodeScannerOptions;
   seller: any={
     'name': 'พิพัฒน์พงษ์',
@@ -73,9 +73,8 @@ export class FindByQrCodePage implements OnInit {
     }
 
     this.barcodeScanner.scan(this.option).then((barcodeData) => {
-      // this.data = barcodeData.text
-      let _data = '1535688483059-3459324345189'.split("-");
-      console.log(_data[0])
+      this.data = barcodeData.text
+      let _data = this.data.split("-");
 
       this.search_user(this.data)
     }, (err) => {
@@ -88,9 +87,7 @@ export class FindByQrCodePage implements OnInit {
   search_user(sellercode) {
     this.findSeller.getSeller(sellercode).subscribe(res => {
 
-    this.seller = res
-    console.log(this.seller)
-    // if(sellercode != '122222'){
+      this.seller = res
       if (JSON.stringify(this.seller) == '{}') {
         this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
         this.has_user = false
@@ -98,10 +95,21 @@ export class FindByQrCodePage implements OnInit {
       } else {
         //ถ้าทำการสแกน QR Code แล้วเจอ user 
         //1.ให้ทำการเก็บใน localStorage
-        this.matchingStatus(this.seller);
-        // localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
-        // this.has_user = true
-       
+            //ทำการ split ค่าจากการสแกน qrcode จาก user วันที่timpstamp-id card
+           
+            let payload={
+              name : res.name+ " " + res.last_name,
+              mobile: res.mobile,
+              email: res.email,
+              matching_status : 1
+            }
+            //add payload ไปที่ firebase
+            this.angular2Provider.addUser(this.data, payload);
+  
+            this.seller.doc_id = this.data
+            localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
+            this.has_user = true
+
       }
     }, (error: any) => {
       this.presentAlert("ผลการค้นหา","ไม่พบข้อมูล");
@@ -132,36 +140,6 @@ export class FindByQrCodePage implements OnInit {
 
   goToMainMenu(){
     this.app.getRootNav().setRoot('main-menu-purchase-items')
-  }
-
-  matchingStatus(seller){
-    //ทำการ split ค่าจากการสแกน qrcode จาก user วันที่timpstamp-id card
-    let data = '1535688483059-3459324345189'; 
-    let _data = data.split("-");
-    let id_card = _data[1]; 
-    //ทำการค้นหา seller โดย id_card จาก db   
-    this.findSeller.getSeller(id_card).subscribe(res => { console.log(res)
-        if(JSON.stringify(res) === "{}"){
-          let title ="ผลการค้นหา";
-          let subtitle = "ไม่พบการ matching  กรุณาลองใหม่";
-          this.presentAlert(title, subtitle);
-          this.has_user = false
-          this.Scanqrcode();
-        }else{
-          let payload={
-            name : res.name+ " " + res.last_name,
-            phone: res.mobile,
-            email: res.email,
-            matching_status : 1
-          }
-          //add payload ไปที่ firebase
-          this.angular2Provider.addUser(data, res);
-
-          this.seller = res
-          localStorage.setItem('sellerProfile', JSON.stringify( this.seller))
-          this.has_user = true
-        }
-    })
   }
 
 }

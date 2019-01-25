@@ -7,6 +7,7 @@ export interface Item {
   item_categories_name: string
   image_url: string
   updated_at_th?: string
+  mobile:string
 }
 
 export interface addNewItem {

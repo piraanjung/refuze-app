@@ -17,23 +17,25 @@
 
 
 <ion-content>
-    <ion-grid no-padding *ngIf="user != null">
+    <ion-grid  *ngIf="user != null">
         <ion-row padding background-size container-hearder-image style="background-image: url('assets/images/background-small/10.jpg');" >
-            <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-left>
+                                <span span-large>{{user.name}} {{user.lastname}}</span>
+            <ion-col col-7>
                 <h1 header-title>{{user.address}}</h1>
                 <h2 header-subtitle>
-                  <div>อำเภอ {{user.DISTRICT_NAME}} </div>
-                  <div>จังหวัด{{ user.PROVINCE_NAME }}
-                    {{user.zipcode}}
-                  </div>
+                    <div>ตำบล {{user.tambon_name}} </div>
+                    <div>อำเภอ {{user.amphur_name}} </div>
+                    <div>จังหวัด{{ user.province_name }}
+                        {{user.zipcode}}
+                    </div>
                 </h2>
             </ion-col>
-            <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right>
-                <span span-large>{{user.name}} {{user.last_name}}</span>
-                <button ion-button button-clear-outline round outline>
-                    <ion-icon name="phone-portrait"></ion-icon> {{ user.mobile}}
-          </button> 
+            <ion-col col-5>
+                    <button ion-button button-clear-outline round outline>
+                            <ion-icon name="phone-portrait"></ion-icon> {{ user.phone}}
+                  </button> 
             </ion-col>
+
         </ion-row>
         </ion-grid>
         <ion-grid no-padding *ngIf="purchaseHisLists != null" id="purchase-his-list">
@@ -62,7 +64,7 @@
                                           <ion-row>
                                             <ion-col col-6>
                                               <h2 item-title>{{_item.item_name}}</h2>
-                                              <h2 item-subtitle style="padding-left:20px">{{_item.price}} / {{_item.unit_name}}</h2>
+                                              <h2 item-subtitle style="padding-left:20px">{{_item.price}} บาท / {{_item.unit_name}}</h2>
                                             </ion-col>
                                             <ion-col col-3>
                                               <h2 item-subtitle text-center>{{_item.amount}}</h2>

@@ -14,19 +14,11 @@
 
 
 <ion-content>
-  <ion-grid no-padding *ngIf="sellers != null">
-    <ion-row>
-      <ion-col col-12>
-        <ion-list no-margin>
-          <ion-list-header header-bcg no-padding no-lines>
-            
-            <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-          </ion-list-header>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
-          <ion-grid no-padding *ngIf="data != null">
-            <ion-row>
-              <ion-col col-12>
-                <ion-list no-margin>
+    
+          
+                <ion-list no-margin *ngIf="sellers != null">
                   <ul no-margin no-padding class="collapsible">
                     <li *ngFor="let seller of sellers" no-lines [ngClass]="animateClass">
                       <ion-list no-margin (click)="toggleGroup(seller,seller)">
@@ -35,7 +27,7 @@
                             <img src="assets/images/avatar/23.jpg" />
                           </ion-avatar>
 
-                          <h2 item-title padding-left>{{seller.name}} {{seller.last_name}}</h2>
+                          <h2 item-title padding-left>{{seller.name}} {{seller.lastname}}</h2>
                           <h2 item-subtitle padding-left>{{seller.id_card}} </h2>
                           <ion-icon name="ios-arrow-dropdown-outline" item-right></ion-icon>
                         </ion-item>
@@ -63,11 +55,5 @@
                     </li>
                   </ul>
                 </ion-list>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
 </ion-content>

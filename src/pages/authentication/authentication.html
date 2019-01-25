@@ -3,7 +3,18 @@
     <ion-grid *ngIf="data != null">
       <ion-row wrap padding>
         <ion-col col-12>
-          <img [src]="data.logo" *ngIf="data.logo != null">
+          <ion-row>
+            <ion-col col-4>
+                <img [src]="data.logo" *ngIf="data.logo != null">
+            </ion-col>
+            <ion-col col-8>
+                <div class="title-components">Kanna B:</div>
+            </ion-col>
+          </ion-row>
+         
+
+         
+
           <ion-item no-padding transparent>
             <ion-label floating>{{ data.username }}</ion-label>
             <ion-input type="text" name="username" [(ngModel)]="params.username" required></ion-input>

@@ -4,7 +4,6 @@ import { Sellers } from '../../models/sellers';
 import { Buyer } from '../../models/buyer';
 import { Item } from '../../models/item';
 import { PurchaseItemsProvider } from '../../providers/purchase-items/purchase-items';
-import { User } from '../../models/firebase.models';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { appconfig } from '../../providers/api-urls';
 import { Observable } from "rxjs";
@@ -55,15 +54,16 @@ export class PurchaseItemsPage {
     this.seller = JSON.parse(localStorage.getItem('sellerProfile')) || {}
     this.buyer = JSON.parse(localStorage.getItem('buyerProfile')) || {}
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
-
+console.log(this.seller)
+console.log(this.buyer)
     this.total = this.calTotal(this.items)
     this.DisabledPurchaseButton(this.total)
 
     if (Object.keys(this.seller).length !== 0) {
       this.id = this.id
-      this.fullname = `${this.seller.name} ${this.seller.last_name}`
+      this.fullname = `${this.seller.name} ${this.seller.lastname}`
       this.mobile = `โทร. ${this.seller.mobile}`
-      this.address = ` ${this.seller.address} ต. ${this.seller.DISTRICT_NAME} อ. ${this.seller.AMPHUR_NAME} จ. ${this.seller.PROVINCE_NAME} ${this.seller.zipcode}`
+      this.address = ` ${this.seller.address} ต. ${this.seller.tambon_name} อ. ${this.seller.amphur_name} จ. ${this.seller.province_name} ${this.seller.zipcode}`
     }
   }
 
@@ -93,48 +93,18 @@ export class PurchaseItemsPage {
       balance: this.total,
       items: this.items
     }
-
+    console.log(this.seller)
     this.purchaseItemsProvider.createPurchaseProfile(params)
       .subscribe((res) => {
-        loading.dismiss();
-        this.isHide = true
-        // update status = 2
-        let email = "note32@gmail.com";
-        this.db.collection<User>(appconfig.users_endpoint, 
-          ref =>{
-            
-            return ref.where("email", "==", email).where("status", "==", 1)
-          }).valueChanges().subscribe(data =>{
-            if(data.length === 0){
-              // var currentUser = {
-              //   name : this.seller.name,
-              //   email: email,
-              //   time: new Date().getTime(),
-              //   status: 2
-              // };
-              console.log('has  1')
-    
-              
-            }else{
-              console.log('1')
-                this.db.collection(appconfig.users_endpoint).doc(res.id).update({
-                  status : '2'
-                }).then(()=>{
-                  console.log('status change to  be 2')
-                }).catch(err=>{
-                  console.log(err)
-                })
+        //update  firebase->matching_status = 3 (บันทึกข้อมูลแล้ว)
+      //   this.db.collection(appconfig.users_endpoint).doc(this.seller.doc_id).update({
+      //     matching_status: 3
+      //   });
 
-              //console.log(res.id)
-              //update  status ให้เป็รน1
-              // this.db.collection(appconfig.users_endpoint).doc(data).update({foo: "bar"});
-                 
-            }
-         })
-
-      })
+      loading.dismiss();
+      this.isHide = true 
+    })
   }
-
   DisabledPurchaseButton(total) {
     if (total <= 0) this.isDisabled = false
   }

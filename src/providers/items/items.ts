@@ -17,7 +17,7 @@ export class ItemsProvider {
   }
 
   getFavorite() {
-    return this.http.get<Item[]>(`${API_URL}/items-favorite`, { headers: this.API_HEADERS })
+    return this.http.get<Item[]>(`${API_URL}/items-favorite`)
   }
 
   getItems() {
@@ -25,6 +25,6 @@ export class ItemsProvider {
   }
 
   setItemPrice(params: ItemPrice) {
-    return this.http.put(`${API_URL}/items-update-price`, params, { headers: this.API_HEADERS })
+    return this.http.post(`${API_URL}/api/items-update-price`, params)
   }
 }
