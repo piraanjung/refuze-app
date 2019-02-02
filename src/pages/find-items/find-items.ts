@@ -4,6 +4,7 @@ import { ItemsProvider } from '../../providers/items/items';
 import { Item } from '../../models/item';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 import { Sellers } from '../../models/sellers';
+import { API_URL } from '../../providers/api-urls';
 
 @IonicPage({
   name: 'find-items'
@@ -19,6 +20,12 @@ export class FindItemsPage {
   seller: Sellers
   data: any;
   _class:any;
+  _seller:any = [
+    'name',
+    'lastname',
+    'image',
+  ];
+  server_url:string;
 
 
   constructor(
@@ -45,7 +52,14 @@ export class FindItemsPage {
     this.getFavorite()
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
     this.countItems = Object.keys(this.items).length
-    this.seller = JSON.parse(localStorage.getItem('sellerProfile'))
+    this.seller = JSON.parse(localStorage.getItem('sellerInfo'));
+    this.server_url = API_URL;
+    console.log(this.items);
+    this._seller.name  = this.seller.name;
+    this._seller.lastname = this.seller.lastname;
+    this._seller.image = this.seller.image;
+
+
   }
 
   getFavorite() {

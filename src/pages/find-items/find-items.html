@@ -1,43 +1,60 @@
 <ion-header>
   <ion-navbar>
-      <button ion-button icon-only menuToggle (click)="goTofindSellerTabs()">
-          <ion-icon name="backspace"></ion-icon>
-        </button>
-    <ion-title>รับซื้อรายการขยะ  </ion-title>
+    <button ion-button icon-only menuToggle (click)="goTofindSellerTabs()">
+      <ion-icon name="backspace"></ion-icon>
+    </button>
+    <ion-title>รับซื้อรายการขยะ </ion-title>
   </ion-navbar>
-  <ion-fab #fab right top  [navPush]='PurchaseItems'>
-      <button ion-fab color="danger"><ion-icon name="cart"></ion-icon>
-        <ion-badge color="google">{{ countItems }}</ion-badge>
-      </button>
-    </ion-fab>
+  <ion-fab #fab right top [navPush]='PurchaseItems'>
+    <button ion-fab color="secondary">
+      <ion-icon name="cart"></ion-icon>
+      <ion-badge color="google">{{ countItems }}</ion-badge>
+    </button>
+  </ion-fab>
 </ion-header>
 
 <ion-content>
   <ion-grid no-padding *ngIf="data != null">
-      <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
-      <ion-list>
-          <ion-item *ngFor="let item of items; let i =index" (click)="presentaddModalItem(item)">
-            <ion-thumbnail item-start>
-              <!-- <img src="assets/images/avatar/0.jpg"> -->
-              <img src="{{item.image_url}}">
-            </ion-thumbnail>
-            <h2>{{ item.name }}</h2>
-            <p>
-                <ion-badge color="google" class="badge badge-md badge-md-google" 
-                ng-reflect-color="google"
-                *ngIf="testdate(item.updated_at_th) == false">{{ item.price }} บาท</ion-badge>
-                <ion-badge color="facebook" class="badge badge-md badge-md-facebook" 
-                ng-reflect-color="facebook"
-                *ngIf="testdate(item.updated_at_th) == true">{{ item.price }} บาท</ion-badge>
+    <ion-item class="item item-block item-md" no-lines padding-left>
+      <ion-icon icon-medium item-start role="img" class="icon icon-md item-icon">
+        <i class="icon icon-play-circle"></i>
+      </ion-icon>
+      <ion-avatar item-start><img src="{{server_url}}/images/users/{{_seller.image}}"></ion-avatar>
+      <div class="item-inner">
+        <div>
+          <h2 item-title no-padding>{{_seller.name}} {{_seller.lastname}}</h2>
 
-            </p>
-            <p>[{{item.updated_at_th}}]</p>
-            <button ion-button clear item-end>View</button>
-          </ion-item>
-        </ion-list>
+          <h3 item-subtitle no-padding>สมาชิกผู้ขายขยะ</h3>
+        </div>
+        <ion-reorder>
+          <ion-icon name="reorder" role="img" class="icon icon-md ion-md-reorder" aria-label="reorder" ng-reflect-name="reorder"></ion-icon>
+        </ion-reorder>
+      </div>
+      <div class="button-effect"></div>
+    </ion-item>
+    <!-- <h1 >{{seller.name}} {{seller.lastname}}</h1> -->
+    <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let item of items; let i =index" (click)="presentaddModalItem(item)">
+        <ion-thumbnail item-start>
+          <!-- <img src="assets/images/avatar/0.jpg"> -->
+          <img src="{{server_url}}/images/{{item.image}}">
+        </ion-thumbnail>
+        <h2>{{ item.name }}</h2>
+        <p>
+          <ion-badge color="google" class="badge badge-md badge-md-google" ng-reflect-color="google" *ngIf="testdate(item.updated_at_th) == false">{{
+            item.price }} บาท</ion-badge>
+          <ion-badge color="facebook" class="badge badge-md badge-md-facebook" ng-reflect-color="facebook" *ngIf="testdate(item.updated_at_th) == true">{{
+            item.price }} บาท</ion-badge>
+
+        </p>
+        <p>[{{item.updated_at_th}}]</p>
+        <button ion-button item-end color="secondary">เพิ่มข้อมูล</button>
+      </ion-item>
+    </ion-list>
   </ion-grid>
 </ion-content>
-    
+
 
 <!-- <ion-row>
        <ion-col col-12>

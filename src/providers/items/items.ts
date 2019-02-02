@@ -21,7 +21,7 @@ export class ItemsProvider {
   }
 
   getItems() {
-    return this.http.get<Item[]>(`${API_URL}/items`, { headers: this.API_HEADERS })
+    return this.http.get<Item[]>(`${API_URL}/items`)
   }
 
   setItemPrice(params: ItemPrice) {

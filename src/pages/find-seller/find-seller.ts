@@ -15,12 +15,12 @@ export class FindSellerPage {
   data: any = {}
   sellers: Sellers[];
   // sellers = {};
-  seller: Sellers
-  id: number
-  address: string
-  mobile: string
-  fullname: string
-  image_url: string
+  seller: Sellers;
+  id: number;
+  address: string;
+  mobile: string;
+  fullname: string;
+  image_url: string;
   FindItemsPage: string
   animateItems = [];
   animateClass: any;
@@ -73,8 +73,8 @@ export class FindSellerPage {
   }
 
   gotoFindItems(member){
-    this.seller = member;    
-    localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
+    console.log(member)
+    localStorage.setItem('sellerInfo', JSON.stringify(member))
     this.app.getRootNav().setRoot('find-items');
   }
 

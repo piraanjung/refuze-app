@@ -13,47 +13,24 @@
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
   <ion-grid no-padding *ngIf="data != null">
-  <ion-list  *ngFor="let seller of sellers" (click)="gotoFindItems(seller)"  [ngClass]="animateClass">
-      <button ion-item >
+  <ion-list >
+    <ion-item *ngFor="let seller of sellers" (click)="gotoFindItems(seller)">
           <ion-avatar item-start>
               <img src="assets/images/avatar/23.jpg" />
-            </ion-avatar>
-          <h2 item-title padding-left>{{seller.name}} {{seller.lastname}}</h2>
-                  <h2 item-subtitle padding-left>เลขบัตรประชาชน:{{seller.id_card}} </h2>
-                  <h5 header-subtitle padding-left>
-                      {{ seller.address }}
-                      ต. {{seller.tambon_name}}
-                      
-                    </h5>
-                    <h5 header-subtitle padding-left>อ. {{seller.amphur_name}}
-                        จ. {{seller.province_name}}</h5>
-      </button>  
-      <div class="item-accordion" [ngClass]="{'active': isGroupShown(seller) }" [hidden]="!isGroupShown(seller)">
-          <ion-row>
-            <ion-col col-4>
-              <img src="assets/images/avatar/23.jpg" />
-            </ion-col>
-            <ion-col col-8>
-              <h2 header-title>{{seller.name}} {{seller.lastname}}</h2>
-              <h5 header-title>{{ seller.phone }}</h5>
-              <h5 header-subtitle>
-                {{ seller.address }}
-                ต. {{seller.tambon_name}}
-                อ. {{seller.amphur_name}}
-                จ. {{seller.province_name}}
-                {{seller.zipcode}}
-              </h5>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-12 col-sm-12 col-md-12 offset-2 offset-lg-2 col-lg-6 offset-xl-2 col-xl-6>
-              <button ion-button round color="facebook" (click)="gotoFindItems()">รับซื้อขยะ</button>
-              <button ion-button round color="twitter" (click)="goToHistorySeller(seller)">ประวัติรับซื้อขยะ</button>
-            </ion-col>
-          </ion-row>
-
-        </div>
+          </ion-avatar>
+          <h1>{{seller.name}} {{seller.lastname}}</h1>
+          <h2 item-subtitle padding-left>เลขบัตรประชาชน:{{seller.id_card}} </h2>
+          <h5 header-subtitle padding-left>
+              {{ seller.address }}
+              ต. {{seller.tambon_name}}
+              
+          </h5>
+          <h5 header-subtitle padding-left>อ. {{seller.amphur_name}}
+              จ. {{seller.province_name}}
+          </h5>
+          <button ion-button round item-end color="secondary">ซื้อขยะ</button>
+        </ion-item>
+     
     </ion-list>
   </ion-grid>
 </ion-content>
