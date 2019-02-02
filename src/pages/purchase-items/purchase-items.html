@@ -9,17 +9,18 @@
     <ion-row header-bcg padding>
       <ion-col col-2>
         <ion-avatar item-start>
-          <img src="assets/images/avatar/23.jpg" />
+          <img src="{{url_server}}/images/users/{{image_url}}" />
         </ion-avatar>
       </ion-col>
 
       <ion-col col-5 text-left>
         <h2 header-title no-margin text-wrap>{{ fullname }}</h2>
-        <h3 header-subtitle no-margin>{{ mobile }}</h3>
+        <h3 header-subtitle no-margin>สมาชิกผู้ขายขยะ</h3>
       </ion-col>
 
       <ion-col col-5 text-right>
         <span header-subtitle no-margin address>{{ address }}</span>
+        <p> {{mobile}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -34,8 +35,9 @@
               <ion-icon name="close" *ngIf="!isHide"></ion-icon>
             </button>
           </ion-fab>
-          <h2 item-start>{{ item.name }}
-            <small>{{ item.price }} บาท :{{ item.unit_name }}</small>
+          <h2 item-start>
+              <button ion-button round>{{ item.name }}</button >
+            <b>{{ item.price }} บาท :{{ item.unit_name }}</b>
           </h2>
 
           <ion-card-content>
@@ -68,10 +70,20 @@
       </ion-col>
       <ion-col col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right>
         <span span-large>{{ total }} </span>
-        <h2 header-subtitle>บาท</h2>
-        <button ion-button color="facebook" block round (click)="createPurchaseProfile()" *ngIf="!isHide" [disabled]="!isDisabled">บันทึกรายการซื้อขยะ</button>
+        <span header-subtitle>บาท</span>
       </ion-col>
     </ion-row>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+              <button ion-button color="danger" block round (click)="cancelPurchaseProfile()" *ngIf="!isHide" [disabled]="!isDisabled">ยกเลิกรายการซื้อขยะ</button>
+          </ion-col>
+          <ion-col col-6>
+              <button ion-button color="facebook" block round (click)="createPurchaseProfile()" *ngIf="!isHide" [disabled]="!isDisabled">บันทึกรายการซื้อขยะ</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
     <ion-row>
       <!-- <ion-col col-4>

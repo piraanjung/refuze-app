@@ -16,7 +16,7 @@
   <ion-list >
     <ion-item *ngFor="let seller of sellers" (click)="gotoFindItems(seller)">
           <ion-avatar item-start>
-              <img src="assets/images/avatar/23.jpg" />
+              <img src="{{url_server}}/images/users/{{seller.image}}" />
           </ion-avatar>
           <h1>{{seller.name}} {{seller.lastname}}</h1>
           <h2 item-subtitle padding-left>เลขบัตรประชาชน:{{seller.id_card}} </h2>

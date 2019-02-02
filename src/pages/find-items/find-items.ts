@@ -50,9 +50,9 @@ export class FindItemsPage {
 
   ionViewWillEnter() {
     this.getFavorite()
-    this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
+    this.items = JSON.parse(localStorage.getItem('purchaseItems')) || [];
     this.countItems = Object.keys(this.items).length
-    this.seller = JSON.parse(localStorage.getItem('sellerInfo'));
+    this.seller = JSON.parse(localStorage.getItem('sellerProfile')) || {};
     this.server_url = API_URL;
     console.log(this.items);
     this._seller.name  = this.seller.name;

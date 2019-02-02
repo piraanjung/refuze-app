@@ -2,15 +2,16 @@ page-authentication {
   [logozone]{
     background-color:#52BEB7; 
     height: 280px;
+    text-align: center;
     border-radius: 0px 0px 10px 10px
   }
   .title-components{
-    color: theme-colors('mainColors', 'secondary-first');
+    color: #ffffff;
     font-size: 24px;
     font-weight: bolder;
     clear: both;
     display: block;
-    margin: 32px 0;
+    margin: 20px 0px 0px 0px ;
     text-align: center;
     text-transform: uppercase;
     // border-bottom: 1px solid theme-colors('mainColors', 'secondary-first');

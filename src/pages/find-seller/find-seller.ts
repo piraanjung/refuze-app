@@ -4,6 +4,7 @@ import { Sellers } from '../../models/sellers';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 import { ProfileSellerPage } from '../profile-seller/profile-seller';
 import { PurchaseHistoryPage } from '../purchase-history/purchase-history';
+import { API_URL } from '../../providers/api-urls';
 @IonicPage({
   name: 'find-seller'
 })
@@ -24,6 +25,7 @@ export class FindSellerPage {
   FindItemsPage: string
   animateItems = [];
   animateClass: any;
+  url_server: string;
 
   constructor(
     private navCtrl: NavController,
@@ -39,7 +41,8 @@ export class FindSellerPage {
     this.data.iconPlay = ''
     this.data.title = ''
     this.data.description = ''
-    this.sellers = []
+    this.sellers = [];
+    this.url_server = API_URL;
   }
 
   ionViewDidLoad() {
@@ -74,7 +77,7 @@ export class FindSellerPage {
 
   gotoFindItems(member){
     console.log(member)
-    localStorage.setItem('sellerInfo', JSON.stringify(member))
+    localStorage.setItem('sellerProfile', JSON.stringify(member))
     this.app.getRootNav().setRoot('find-items');
   }
 

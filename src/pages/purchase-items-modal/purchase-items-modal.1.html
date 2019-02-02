@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ฟอร์มบันทึกข้อมูลการรับซื้อขยะ</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">ปิด</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content default-background>
+  <ion-grid *ngIf="data != null">
+    <ion-row wrap padding>
+      <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+        <!--Form-->
+
+        <div class="form">
+          <div logo>
+            <!---Logo-->
+            <img src="assets/images/logo/login.png" />
+            <!-- <img float-left [src]="data.logo" *ngIf="data.logo != null" /> -->
+          </div>
+          <!--Form Title-->
+          <h1 title text-left>{{ name }}</h1>
+          <small>{{ price }}&nbsp;บาท&nbsp;/&nbsp;{{ unit_name }}</small>
+          <!---Input field username-->
+          <ion-row>
+            <ion-col col-6>
+              <h2 text-left>ราคา</h2>
+              <div class="amount_input">
+                <ion-input required type="number" [(ngModel)]="price"></ion-input>
+              </div>
+            </ion-col>
+            <ion-col col-6>
+              <h2 text-left>จำนวน</h2>
+              <div class="amount_input">
+                <ion-input required type="number" [(ngModel)]="amount"></ion-input>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="row">
+            <ion-col col-12>
+              <h2 text-right class="total">
+                <small>=</small> {{ price * amount }}
+                <small>บาท</small>
+              </h2>
+              <div text-right>
+                <button ion-button outline  round color="facebook" (click)="addNewItem()">
+                  บันทึกข้อมูล
+                </button>
+              </div>
+              
+            </ion-col>
+          </ion-row>
+          <!---Input field password-->
+
+
+          <!---Register button-->
+
+        </div>
+
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
+
+<ion-content has-header="" white-background="" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><ion-grid class="grid">
+
+        <ion-row class="row" padding="">
+
+            <ion-col class="col" col-12="" col-lg-6="" col-md-12="" col-sm-12="" col-xl-6="" offset-lg-3="" offset-xl-3="">
+
+                
+
+                <ion-item class="item item-block item-md item-input item-label-floating ng-pristine ng-invalid ng-touched" no-padding="" transparent=""><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-323">Username</ion-label><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><ion-input required="" type="text" class="input input-md ng-pristine ng-invalid ng-touched" ng-reflect-required="" ng-reflect-type="text"><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><input class="text-input text-input-md" dir="auto" ng-reflect-klass="text-input" ng-reflect-ng-class="text-input-md" type="text" aria-labelledby="lbl-323" autocomplete="off" autocorrect="off" placeholder="" required="" ng-reflect-required="" ng-reflect-type="text"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></ion-input></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div class="button-effect"></div></ion-item>
+
+                
+
+                <ion-item class="item item-block item-md item-input item-label-floating ng-untouched ng-pristine ng-invalid" no-padding="" transparent=""><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-324">Password</ion-label><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><ion-input required="" type="password" class="input input-md ng-untouched ng-pristine ng-invalid" ng-reflect-required="" ng-reflect-type="password"><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><input class="text-input text-input-md" dir="auto" ng-reflect-klass="text-input" ng-reflect-ng-class="text-input-md" type="password" aria-labelledby="lbl-324" autocomplete="off" autocorrect="off" placeholder="" required="" ng-reflect-required="" ng-reflect-type="password"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></ion-input></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div class="button-effect"></div></ion-item>
+
+                
+
+                <button button-clear="" clear="" float-right="" ion-button="" ng-reflect-clear="" class="button button-md button-clear button-clear-md"><span class="button-inner">Register</span><div class="button-effect"></div></button>
+
+                
+
+                <button button-clear="" clear="" float-right="" ion-button="" ng-reflect-clear="" class="button button-md button-clear button-clear-md"><span class="button-inner">Login</span><div class="button-effect"></div></button>
+
+            </ion-col>
+
+            
+
+            <ion-col class="col" col-12="" col-lg-6="" col-md-12="" col-sm-12="" col-xl-6="" offset-lg-3="" offset-xl-3="" social="">
+
+                
+
+                <button color="facebook" ion-button="" outline="" round="" ng-reflect-color="facebook" ng-reflect-outline="" ng-reflect-round="" class="button button-md button-outline button-outline-md button-round button-round-md button-outline-md-facebook"><span class="button-inner">Facebook</span><div class="button-effect"></div></button>
+
+                
+
+                <button color="twitter" ion-button="" outline="" round="" ng-reflect-color="twitter" ng-reflect-outline="" ng-reflect-round="" class="button button-md button-outline button-outline-md button-round button-round-md button-outline-md-twitter"><span class="button-inner">Twitter</span><div class="button-effect"></div></button>
+
+                
+
+                <button color="google" ion-button="" outline="" round="" ng-reflect-color="google" ng-reflect-outline="" ng-reflect-round="" class="button button-md button-outline button-outline-md button-round button-round-md button-outline-md-google"><span class="button-inner">Google</span><div class="button-effect"></div></button>
+
+                
+
+                <button color="pinterest" ion-button="" outline="" round="" ng-reflect-color="pinterest" ng-reflect-outline="" ng-reflect-round="" class="button button-md button-outline button-outline-md button-round button-round-md button-outline-md-pinterest"><span class="button-inner">Pinterest</span><div class="button-effect"></div></button>
+
+            </ion-col>
+
+            
+
+            <ion-col class="col" col-12="" col-lg-6="" col-md-12="" col-sm-12="" col-xl-6="" offset-lg-3="" offset-xl-3="">
+
+                
+
+                <!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><img float-left="" src="assets/images/logo/login.png">
+
+                
+
+                <button button-clear="" clear="" float-right="" ion-button="" margin-top="" ng-reflect-clear="" class="button button-md button-clear button-clear-md"><span class="button-inner">Skip</span><div class="button-effect"></div></button>
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-grid>
+
+</div></ion-content>

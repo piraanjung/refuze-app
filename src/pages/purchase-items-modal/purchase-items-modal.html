@@ -19,25 +19,23 @@
             <img src="assets/images/logo/login.png" />
             <!-- <img float-left [src]="data.logo" *ngIf="data.logo != null" /> -->
           </div>
-          <!--Form Title-->
-          <h1 title text-left>{{ name }}</h1>
-          <small>{{ price }}&nbsp;บาท&nbsp;/&nbsp;{{ unit_name }}</small>
-          <!---Input field username-->
+          <button ion-button round>{{ name }}</button>
           <ion-row>
             <ion-col col-6>
-              <h2 text-left>ราคา</h2>
-              <div class="amount_input">
-                <ion-input required type="number" [(ngModel)]="price"></ion-input>
-              </div>
+                <ion-item>
+                    <ion-label color="primary" floating>ราคา</ion-label>
+                    <ion-input required type="number" [(ngModel)]="price" style="font-size: 30px !important"></ion-input>
+                  </ion-item>
             </ion-col>
             <ion-col col-6>
-              <h2 text-left>จำนวน</h2>
-              <div class="amount_input">
-                <ion-input required type="number" [(ngModel)]="amount"></ion-input>
-              </div>
+                <ion-item>
+                    <ion-label color="primary" floating>จำนวน</ion-label>
+                    <ion-input required type="number" [(ngModel)]="amount" style="font-size: 30px !important"></ion-input>
+                  </ion-item>
             </ion-col>
           </ion-row>
-
+         
+           
           <ion-row class="row">
             <ion-col col-12>
               <h2 text-right class="total">
