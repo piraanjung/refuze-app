@@ -72,7 +72,8 @@ export class FindSellerPage {
     })
   }
 
-  gotoFindItems(){
+  gotoFindItems(member){
+    this.seller = member;    
     localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
     this.app.getRootNav().setRoot('find-items');
   }

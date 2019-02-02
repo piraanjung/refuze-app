@@ -2,8 +2,8 @@ export const MAIN_MENU_PURCHASE_ITEMS = {
   "items": [
     {
       "image": "assets/images/background/0.jpg",
-      "title": "ค้นหาผู้ขายขยะ",
-      "title_button" :"ค้นหาผู้ขายขยะ",
+      "title": "รับซื้อขยะ",
+      "title_button" :"รับซื้อขยะ",
       "link": 'find-seller-tabs'
     },
     {
