@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, App } from 'ionic-angular';
 import { Sellers } from '../../models/sellers';
 import { Buyer } from '../../models/buyer';
 import { Item } from '../../models/item';
 import { PurchaseItemsProvider } from '../../providers/purchase-items/purchase-items';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { API_URL } from '../../providers/api-urls';
-import { Observable } from "rxjs";
+import { Observable, concat } from "rxjs";
 import { Angular2ServiceProvider } from "../../providers/angular2-service/angular2-service";
 
 @IonicPage({
@@ -41,10 +41,12 @@ export class PurchaseItemsPage {
     private loadingCtrl: LoadingController,
     private purchaseItemsProvider: PurchaseItemsProvider,
     private db: AngularFirestore,
-    private angular2Provider: Angular2ServiceProvider
+    private angular2Provider: Angular2ServiceProvider,
+    private alertCtrl: AlertController,
+    private app: App,
   ) {
     this.total = 0
-    this.isHide = false
+    this.isHide = true
     this.isDisabled = true
     this.FindSellerPage = 'find-seller'
     this.MainMenuPage = 'main-menu-purchase-items'
@@ -112,6 +114,27 @@ export class PurchaseItemsPage {
   }
 
   cancelPurchaseProfile(){
-
+    console.log(localStorage.getItem('purchaseItems'));
+    const confirm = this.alertCtrl.create({
+      title: 'คุณต้องการลบข้อมูลทั้งหมด?',
+      message: '',
+      buttons: [
+        {
+          text: 'ไม่ลบ',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'ลบ',
+          handler: () => {
+            this.items = [];
+            localStorage.setItem('purchaseItems', JSON.stringify(this.items));
+            this.app.getRootNav().setRoot('find-items');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

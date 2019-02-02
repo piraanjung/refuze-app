@@ -54,11 +54,9 @@ export class FindItemsPage {
     this.countItems = Object.keys(this.items).length
     this.seller = JSON.parse(localStorage.getItem('sellerProfile')) || {};
     this.server_url = API_URL;
-    console.log(this.items);
     this._seller.name  = this.seller.name;
     this._seller.lastname = this.seller.lastname;
     this._seller.image = this.seller.image;
-
 
   }
 
