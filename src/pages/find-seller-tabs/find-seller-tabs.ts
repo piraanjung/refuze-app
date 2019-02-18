@@ -17,10 +17,13 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class FindSellerTabsPage {
 
-  findByNameRoot = 'find-seller'
-  findByQrCodeRoot = 'find-by-qr-code'
+  findByNameRoot:any;
+  findByQrCodeRoot:any;
 
 
-  constructor(public navCtrl: NavController) {}
-
+  constructor(public navCtrl: NavController) {
+    this.findByNameRoot = 'find-seller';
+    this.findByQrCodeRoot = 'find-by-qr-code';
+  }
+  
 }

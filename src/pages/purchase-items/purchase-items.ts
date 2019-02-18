@@ -46,7 +46,7 @@ export class PurchaseItemsPage {
     private app: App,
   ) {
     this.total = 0
-    this.isHide = true
+    this.isHide = false
     this.isDisabled = true
     this.FindSellerPage = 'find-seller'
     this.MainMenuPage = 'main-menu-purchase-items'
@@ -60,13 +60,14 @@ export class PurchaseItemsPage {
     this.items = JSON.parse(localStorage.getItem('purchaseItems')) || []
     this.total = this.calTotal(this.items)
     this.DisabledPurchaseButton(this.total)
-
     if (Object.keys(this.seller).length !== 0) {
       this.id = this.id;
-      this.fullname = `${this.seller.name} ${this.seller.lastname}`
+      this.fullname = `${this.seller.name} ${this.seller.lastname}`;
+
       this.mobile = `โทร. ${this.seller.phone}`;
       this.image_url = this.seller.image;
       this.address = ` ${this.seller.address} ต. ${this.seller.tambon_name} อ. ${this.seller.amphur_name} จ. ${this.seller.province_name}`
+       console.log(this.items)
     }
   }
 
@@ -92,10 +93,11 @@ export class PurchaseItemsPage {
     let params = {
       buyer_id: this.buyer.id,
       seller_id: this.seller.id,
-      account_saving_id: this.seller.account_saving_id,
+      account_saving_id: this.seller.acc_id,
       balance: this.total,
       items: this.items
     }
+   console.log(params);
     this.purchaseItemsProvider.createPurchaseProfile(params)
       .subscribe((res) => {
         //update  firebase->matching_status = 3 (บันทึกข้อมูลแล้ว)

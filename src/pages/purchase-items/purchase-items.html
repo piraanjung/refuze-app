@@ -5,25 +5,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row header-bcg padding>
-      <ion-col col-2>
+  <ion-list>
+    <ion-item>
         <ion-avatar item-start>
-          <img src="{{url_server}}/images/users/{{image_url}}" />
-        </ion-avatar>
-      </ion-col>
+            <img src="{{url_server}}/images/users/{{image_url}}" />
+          </ion-avatar>
+          <h2>{{ fullname }}</h2>
+          <p>สมาชิกผู้ขายขยะ</p>
+          <p>{{ address }}</p>
+    </ion-item>
+  </ion-list>
+  
 
-      <ion-col col-5 text-left>
-        <h2 header-title no-margin text-wrap>{{ fullname }}</h2>
-        <h3 header-subtitle no-margin>สมาชิกผู้ขายขยะ</h3>
-      </ion-col>
-
-      <ion-col col-5 text-right>
-        <span header-subtitle no-margin address>{{ address }}</span>
-        <p> {{mobile}}</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
   <div class="showdetails" *ngIf="!isHide">
     <ion-grid no-padding>
       <ion-row>

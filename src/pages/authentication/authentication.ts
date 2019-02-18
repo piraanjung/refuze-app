@@ -37,32 +37,6 @@ export class AuthenticationPage {
   }
 
   ionViewDidEnter(){
-    // this.sim.getSimInfo
-    // this.params.passwords = "1234";
-    // this.params.mobile = '12345676';
-    // this.params.username ='pochai1'
-    // this.authen.AuthenByPasswordAndPhonNumber(this.params).subscribe(
-    //   // this.authen.resAuthen(this.params).subscribe(
-    //     res => {
-    //       // if (res.logged === true) {
-    //       if (res.status === 1) { 
-    //         console.log(res)
-    //         this.presentAlert('', 'พบ');
-
-    //         this.BuyerProfile = res
-    //         localStorage.setItem('buyerProfile', JSON.stringify(this.BuyerProfile))
-    //         this.app.getRootNav().setRoot('main-menu-purchase-items');
-    //       } else {
-    //         this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
-    //         this.params.passwords = ''
-    //         // loader.dismiss();
-    //       }
-    //     },
-    //     error => {
-    //       this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
-    //       // loader.dismiss();
-    //     }
-    //   );
   }
 
   async getSimData() {
@@ -88,27 +62,12 @@ export class AuthenticationPage {
       dismissOnPageChange: true,
     });
 
-    // loader.present();
-    // this.sim.getSimInfo().then(
-    //   (info)=>{
-    //     this.params.mobile = info.phonenumber
-    //     this.presentAlert(this.params.mobile, this.params.mobile)
-    //   }
-    // )
-    // this.params.passwords = "1234";
-    // this.params.mobile = "";
 
-    
-   
-
-    // this.authen.AuthenByPasswordAndPhonNumber(this.params).subscribe(
     this.authen.resAuthen(this.params).subscribe(
       res => {
-        console.log(res)
-        // if (res.logged === true) {
-        if (res.status === 1) { 
+        if (res[1] === 200) { 
           console.log(res)
-          this.BuyerProfile = res
+          this.BuyerProfile = res[0];
           localStorage.setItem('buyerProfile', JSON.stringify(this.BuyerProfile))
           this.app.getRootNav().setRoot('main-menu-purchase-items');
         } else {

@@ -57,8 +57,8 @@ export class FindSellerPage {
     });
 
     loading.present();
-
-    this.findSeller.getSellers().subscribe((res) => {
+    const user_cate_id = 1;
+    this.findSeller.getSellers(user_cate_id).subscribe((res) => {
       this.sellers = res
       loading.dismiss();
       // let i = 1
@@ -83,11 +83,12 @@ export class FindSellerPage {
 
   getItems(ev) {
     let val = ev.target.value;
+    
     if (val && val.trim() != '') {
       if(val.match('^[0-9]*$') != null){
         console.log(this.sellers)
-        //ทำการ search โดย ใช้หมายเลขโทรศัพท์
-        this.sellers = this.sellers.filter((seller) => (seller.phone.indexOf(val)> -1))
+        //ทำการ search โดย ใช้เลขบัตรประชาชน
+        this.sellers = this.sellers.filter((seller) => (seller.id_card.indexOf(val)> -1))
       }else{
         //ทำการค้นหาโยชื่อ
         this.sellers = this.sellers.filter((seller) => (seller.name.toLowerCase().indexOf(val.toLowerCase()) > -1))

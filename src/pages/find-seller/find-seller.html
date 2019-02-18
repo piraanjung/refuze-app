@@ -9,8 +9,13 @@
 </ion-header>
 
 <ion-content class="find-seller">
-
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5><h3>ใส่เลขบัตรประชาชน</h3><h3> หรือชื่อสมาชิก</h3></ion-col>
+      <ion-col col-7><ion-searchbar (ionInput)="getItems($event)"></ion-searchbar></ion-col>
+    </ion-row>
+  </ion-grid>
+  
 
   <ion-grid no-padding *ngIf="data != null">
   <ion-list >
@@ -25,7 +30,7 @@
               ต. {{seller.tambon_name}}
               
           </h5>
-          <h5 header-subtitle padding-left>อ. {{seller.amphur_name}}
+          <h5 header-subtitle padding-left>อ. {{seller.district_name}}
               จ. {{seller.province_name}}
           </h5>
           <button ion-button round item-end color="secondary">ซื้อขยะ</button>

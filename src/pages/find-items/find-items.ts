@@ -57,7 +57,7 @@ export class FindItemsPage {
     this._seller.name  = this.seller.name;
     this._seller.lastname = this.seller.lastname;
     this._seller.image = this.seller.image;
-
+    console.log(this.seller)
   }
 
   getFavorite() {

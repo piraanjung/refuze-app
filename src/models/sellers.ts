@@ -18,4 +18,5 @@ export interface Sellers {
   phone:string
   buy_trash_area_id:number
   buy_trash_point_id:number
+  acc_id:string
 }
