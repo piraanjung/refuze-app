@@ -1,0 +1,63 @@
+<!--
+  Generated template for the TrashBankPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>บัญชีธนาคารขยะ ของฉัน</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="show_create_trans_bank_code == true; else my_transaction_bank">
+    <h3>กรุณาตั้งค่ารหัสทำธุรกรรม</h3>
+    <h4>ด้วยเลข 6 หลัก</h4>
+    <div class="_error">{{transact_code_err}}</div>
+      <ion-list>
+          <ion-item>
+            <ion-label stacked>รหัสทำธุรกรรม</ion-label>
+            <ion-input type="number" [(ngModel)]="transaction_code"></ion-input>
+          </ion-item>
+        
+        </ion-list>
+        <button ion-button block lg (click)="save_trans_code()">บันทึก รหัสทำธุรกรรม</button>
+  </div>
+  <ng-template #my_transaction_bank>
+      <ion-card>
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{user.image}}">
+            </ion-avatar>
+            <h2>{{user.name}} {{user.lastname}}</h2>
+            <p>{{balance}}  บาท</p>
+          </ion-item>
+      </ion-card>
+      <ion-list>
+          <ion-item (click)="balance_transction()"> 
+            <ion-avatar item-start>
+              <img src="{{user.image}}">
+            </ion-avatar>
+            <h2>ยอดเงินคงเหลือ</h2>
+            <p>{{balance}}  บาท</p>
+            <ion-icon name="ios-arrow-dropright" item-end></ion-icon>
+          </ion-item>
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="{{user.image}}">
+              </ion-avatar>
+              <h2>คะแนนสะสม</h2>
+              <p>2100 คะแนน</p>
+              <ion-icon name="ios-arrow-dropright" item-end></ion-icon>
+            </ion-item>
+        </ion-list>
+        
+  </ng-template>
+</ion-content>

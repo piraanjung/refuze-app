@@ -14,19 +14,86 @@
 </div> -->
 
 <!-- <ion-nav [root]="rootPage"  *ngIf="!showSplash"></ion-nav> -->
-<ion-menu [content]="mycontent">
+<ion-menu id="sellermain-side-bar" [content]="mycontent">
   <ion-header>
-    <ion-toolbar color="danger">
+    <ion-toolbar color="blue">
       <ion-title>ขายขยะ</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let item of items" (click)="openPage(item)">
+      <button ion-item *ngFor="let item of main_seller_sidebar" (click)="openPage(item)">
         <ion-icon name="{{item.icon}}"></ion-icon>
         {{item.title}}
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
+
+<ion-menu id="trashbank-side-bar" [content]="mycontent">
+  <ion-header>
+    <ion-toolbar color="blue">
+      <ion-title>ขายขยะ</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let item of trashbank_sidebar" (click)="openPage(item)">
+        <ion-icon name="{{item.icon}}"></ion-icon>
+        {{item.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-menu id="buylocalproducts-side-bar" [content]="mycontent">
+  <ion-header>
+    <ion-toolbar color="blue">
+      <ion-title>ขายขยะ</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let item of buylocalproducts_sidebar" (click)="openPage(item)">
+        <ion-icon name="{{item.icon}}"></ion-icon>
+        {{item.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-menu id="selltrashhistory-side-bar" [content]="mycontent">
+  <ion-header>
+    <ion-toolbar color="blue">
+      <ion-title>ขายขยะ</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let item of selltrashhistory_sidebar" (click)="openPage(item)">
+        <ion-icon name="{{item.icon}}"></ion-icon>
+        {{item.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-menu id="itemsprice-side-bar" [content]="mycontent">
+    <ion-header>
+      <ion-toolbar color="blue">
+        <ion-title>ขายขยะ</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item *ngFor="let item of itemsprice_sidebar" (click)="openPage(item)">
+          <ion-icon name="{{item.icon}}"></ion-icon>
+          {{item.title}}
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+
 <ion-nav #mycontent [root]="rootPage"></ion-nav>

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="mukhunda.piraan.refuze" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name short="Kanna B">Kanna B</name>
+<widget id="kanna.piraan.seller" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name short="Kanna S">Kanna S</name>
     <description>Application for handling your purchase items by your smart phone.</description>
-    <author email="refuze.app@gmail.com" href="https://refuze.com/">Refuze Team</author>
+    <author email="kanna.app@gmail.com" href="https://kanna.com/">Kanna Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

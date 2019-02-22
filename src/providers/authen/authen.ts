@@ -9,7 +9,7 @@ export class AuthenProvider {
   constructor(private http: HttpClient) { }
 
   resAuthen(params): any {
-    return this.http.post<Buyer>(`${API_URL}/api/authen`, params);
+    return this.http.post<Buyer>(API_URL+'/api/authen', params);
   }
 
   AuthenByPasswordAndPhonNumber(params): Observable<any>{

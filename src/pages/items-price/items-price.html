@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button  menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+      <ion-title>ราคากลางขยะ  </ion-title>
+    </ion-navbar>
+
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid no-padding *ngIf="data != null">
+        <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+        <ion-list>
+            <ion-item *ngFor="let item of items; let i =index">
+              <ion-thumbnail item-start>
+                <!-- <img src="assets/images/avatar/0.jpg"> -->
+                <img src="{{item.image_url}}">
+              </ion-thumbnail>
+              <h2>{{ item.name }}</h2>
+              <p>
+                  <ion-badge color="google" class="badge badge-md badge-md-google" 
+                  ng-reflect-color="google"
+                  *ngIf="testdate(item.updated_at_th) == false">{{ item.price }} บาท</ion-badge>
+                  <ion-badge color="facebook" class="badge badge-md badge-md-facebook" 
+                  ng-reflect-color="facebook"
+                  *ngIf="testdate(item.updated_at_th) == true">{{ item.price }} บาท</ion-badge>
+  
+              </p>
+              <p>[{{item.updated_at_th}}]</p>
+              <!-- <button ion-button clear item-end>View</button> -->
+            </ion-item>
+          </ion-list>
+    </ion-grid>
+  </ion-content>
