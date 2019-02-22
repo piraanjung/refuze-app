@@ -1,0 +1,13 @@
+page-seller-main {
+    .item-md ion-thumbnail img {
+        width: 190px  !important;
+        height: 130px  !important;
+    }
+    ion-thumbnail {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+    }
+    .item-block {
+        border-bottom: 1px solid
+    }
+}

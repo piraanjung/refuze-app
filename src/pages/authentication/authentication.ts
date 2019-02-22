@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { IonicPage, LoadingController, AlertController, App } from 'ionic-angular';
 import { AuthenProvider } from '../../providers/authen/authen';
-import { Buyer } from '../../models/buyer';
+import { Sellers } from '../../models/sellers';
 import { NgForm } from '@angular/forms';
 import { Sim } from '@ionic-native/sim';
-@IonicPage()
+@IonicPage({})
 @Component({
   selector: 'page-authentication',
   templateUrl: 'authentication.html',
 })
 export class AuthenticationPage {
   params: any
-  BuyerProfile: Buyer;
+  sellerProfile: Sellers;
   data: any = {
-    logo: 'assets/images/logo/login.png',
+    logo: 'assets/imgs/f_logo.png',
     username: 'Username',
     password: 'Password',
     login: 'ล็อกอิน',
@@ -29,14 +29,42 @@ export class AuthenticationPage {
     public sim: Sim,
     private authen: AuthenProvider) {
     localStorage.removeItem('buyerProfile')
+    localStorage.removeItem('sellerProfile')
+
     this.params = {
       username: '',
       passwords: '',
-      user_cate_id:3
+      user_cate_id:1
     }
   }
 
   ionViewDidEnter(){
+    // this.sim.getSimInfo
+    // this.params.passwords = "1234";
+    // this.params.mobile = '12345676';
+    // this.params.username ='pochai1'
+    // this.authen.AuthenByPasswordAndPhonNumber(this.params).subscribe(
+    //   // this.authen.resAuthen(this.params).subscribe(
+    //     res => {
+    //       // if (res.logged === true) {
+    //       if (res.status === 1) { 
+    //         console.log(res)
+    //         this.presentAlert('', 'พบ');
+
+    //         this.BuyerProfile = res
+    //         localStorage.setItem('sellerProfile', JSON.stringify(this.BuyerProfile))
+    //         this.app.getRootNav().setRoot('main-menu-purchase-items');
+    //       } else {
+    //         this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
+    //         this.params.passwords = ''
+    //         // loader.dismiss();
+    //       }
+    //     },
+    //     error => {
+    //       this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
+    //       // loader.dismiss();
+    //     }
+    //   );
   }
 
   async getSimData() {
@@ -65,11 +93,12 @@ export class AuthenticationPage {
 
     this.authen.resAuthen(this.params).subscribe(
       res => {
-        if (res[1] === 200) { 
-          console.log(res)
-          this.BuyerProfile = res[0];
-          localStorage.setItem('buyerProfile', JSON.stringify(this.BuyerProfile))
-          this.app.getRootNav().setRoot('main-menu-purchase-items');
+        console.log(res)
+        // if (res.logged === true) {
+        if (res[1] == 200) { 
+          this.sellerProfile = res[0];
+          localStorage.setItem('sellerProfile', JSON.stringify(this.sellerProfile))
+          this.app.getRootNav().setRoot('seller-main');
         } else {
           this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
           this.params.passwords = ''
@@ -77,7 +106,7 @@ export class AuthenticationPage {
         }
       },
       error => {
-        this.presentAlert('', 'ไม่พบข้อมูลผู้ใช้ กรุณาลองใหม่');
+        this.presentAlert('', JSON.stringify(error));
         loader.dismiss();
       }
     );
