@@ -17,14 +17,15 @@ export class ItemsProvider {
   }
 
   getFavorite() {
-    return this.http.get<Item[]>(`${API_URL}/items-favorite`)
+    return this.http.get<Item[]>(`${API_URL}/api/items-favorite`)
   }
 
   getItems() {
-    return this.http.get<Item[]>(`${API_URL}/items`, { headers: this.API_HEADERS })
+    return this.http.get<Item[]>(`${API_URL}/api/items`)
   }
 
   setItemPrice(params: ItemPrice) {
+    console.log(params);
     return this.http.post(`${API_URL}/api/items-update-price`, params)
   }
 }

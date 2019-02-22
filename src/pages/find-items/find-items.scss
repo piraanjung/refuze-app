@@ -175,14 +175,40 @@ page-find-items {
     -webkit-text-stroke-color:#ffffff
   }
 
-  [item-title], .span{
-    color:#ffffff !important
-  }
+  // [item-title], .span{
+  //   color:#ffffff !important
+  // }
  
   .label-md {
-     margin: 0px; 
+    margin: 25px 8px 25px 0;
+}
+ion-label {
+    margin: 0;
+    display: block;
+    overflow: hidden;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 [menuToggle]{
   display: inline !important;
+}
+[item-title] {
+  color: #455b65 !important;
+  font-size: 14px !important;
+  letter-spacing: 1px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.label-ios {
+   margin: 5px 8px 5px 0 !important; 
+}
+.text-input-ios{
+  font-size: 40px !important
 }
 }

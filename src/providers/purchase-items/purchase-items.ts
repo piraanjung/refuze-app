@@ -16,7 +16,7 @@ export class PurchaseItemsProvider {
   }
 
   createPurchaseProfile(params): any {
-    return this.http.post(`${API_URL}/api/purchase-items/create`, params)
+    return this.http.post(`${API_URL}/api/purchase-items/purchase_items_store`, params)
   }
 
   getPurchaseTransactionsHistoryBySellerId(id): any {

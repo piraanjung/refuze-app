@@ -1,3 +1,8 @@
 {
-    "git.ignoreLimitWarning": false
+    "git.ignoreLimitWarning": false,
+    "editor.fontSize": 18,
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "500",
+    "workbench.tree.indent": 20,
+    "workbench.colorTheme": "Abyss"
 }

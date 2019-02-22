@@ -15,9 +15,9 @@ export class FindSellersProvider {
     }
   }
 
-  getSellers(): any {
+  getSellers(user_cate_id): any {
     // return this.http.get<Sellers[]>(`${API_URL}/sellers`, { headers: this.API_HEADERS })
-    return this.http.get<Sellers[]>(`${API_URL}/api/sellers`)
+    return this.http.get<Sellers[]>(`${API_URL}/api/users/${user_cate_id}`)
   }
 
   getSeller(id_card) :any{

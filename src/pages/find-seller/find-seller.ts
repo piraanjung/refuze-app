@@ -4,6 +4,7 @@ import { Sellers } from '../../models/sellers';
 import { FindSellersProvider } from '../../providers/find-sellers/find-sellers';
 import { ProfileSellerPage } from '../profile-seller/profile-seller';
 import { PurchaseHistoryPage } from '../purchase-history/purchase-history';
+import { API_URL } from '../../providers/api-urls';
 @IonicPage({
   name: 'find-seller'
 })
@@ -15,15 +16,16 @@ export class FindSellerPage {
   data: any = {}
   sellers: Sellers[];
   // sellers = {};
-  seller: Sellers
-  id: number
-  address: string
-  mobile: string
-  fullname: string
-  image_url: string
+  seller: Sellers;
+  id: number;
+  address: string;
+  mobile: string;
+  fullname: string;
+  image_url: string;
   FindItemsPage: string
   animateItems = [];
   animateClass: any;
+  url_server: string;
 
   constructor(
     private navCtrl: NavController,
@@ -39,7 +41,8 @@ export class FindSellerPage {
     this.data.iconPlay = ''
     this.data.title = ''
     this.data.description = ''
-    this.sellers = []
+    this.sellers = [];
+    this.url_server = API_URL;
   }
 
   ionViewDidLoad() {
@@ -54,8 +57,8 @@ export class FindSellerPage {
     });
 
     loading.present();
-
-    this.findSeller.getSellers().subscribe((res) => {
+    const user_cate_id = 1;
+    this.findSeller.getSellers(user_cate_id).subscribe((res) => {
       this.sellers = res
       loading.dismiss();
       // let i = 1
@@ -72,18 +75,20 @@ export class FindSellerPage {
     })
   }
 
-  gotoFindItems(){
-    localStorage.setItem('sellerProfile', JSON.stringify(this.seller))
+  gotoFindItems(member){
+    console.log(member)
+    localStorage.setItem('sellerProfile', JSON.stringify(member))
     this.app.getRootNav().setRoot('find-items');
   }
 
   getItems(ev) {
     let val = ev.target.value;
+    
     if (val && val.trim() != '') {
       if(val.match('^[0-9]*$') != null){
         console.log(this.sellers)
-        //ทำการ search โดย ใช้หมายเลขโทรศัพท์
-        this.sellers = this.sellers.filter((seller) => (seller.phone.indexOf(val)> -1))
+        //ทำการ search โดย ใช้เลขบัตรประชาชน
+        this.sellers = this.sellers.filter((seller) => (seller.id_card.indexOf(val)> -1))
       }else{
         //ทำการค้นหาโยชื่อ
         this.sellers = this.sellers.filter((seller) => (seller.name.toLowerCase().indexOf(val.toLowerCase()) > -1))

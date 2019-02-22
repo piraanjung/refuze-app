@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { Angular2ServiceProvider } from '../providers/angular2-service/angular2-service';
 import { Sim } from '@ionic-native/sim';
+import { AlertProvider } from '../providers/alert/alert';
 @NgModule({
   declarations: [
     MyApp
@@ -23,7 +24,8 @@ import { Sim } from '@ionic-native/sim';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Angular2ServiceProvider,
-    Sim
+    Sim,
+    AlertProvider
   ]
 })
 export class AppModule {}

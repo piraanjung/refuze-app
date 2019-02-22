@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
+<<<<<<< HEAD
 <widget id="kanna.piraan.seller" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name short="Kanna S">Kanna S</name>
+=======
+<widget id="mukhunda.piraan.buyer" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name short="Kanna B">Kanna B</name>
+>>>>>>> 9b7be645b7c451305c06f60ba5cbf1947aad564b
     <description>Application for handling your purchase items by your smart phone.</description>
     <author email="kanna.app@gmail.com" href="https://kanna.com/">Kanna Team</author>
     <content src="index.html" />

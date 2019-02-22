@@ -90,20 +90,7 @@ export class AuthenticationPage {
       dismissOnPageChange: true,
     });
 
-    // loader.present();
-    // this.sim.getSimInfo().then(
-    //   (info)=>{
-    //     this.params.mobile = info.phonenumber
-    //     this.presentAlert(this.params.mobile, this.params.mobile)
-    //   }
-    // )
-    // this.params.passwords = "1234";
-    // this.params.mobile = "";
 
-    
-   
-
-    // this.authen.AuthenByPasswordAndPhonNumber(this.params).subscribe(
     this.authen.resAuthen(this.params).subscribe(
       res => {
         console.log(res)

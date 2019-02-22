@@ -57,8 +57,8 @@ export class SearchPurchaseHistoryPage {
     });
 
     loading.present();
-
-    this.findSeller.getSellers().subscribe((res) => {
+    const user_cate_id = 1
+    this.findSeller.getSellers(user_cate_id).subscribe((res) => {
       loading.dismiss();
       let i = 0
       let that = this
